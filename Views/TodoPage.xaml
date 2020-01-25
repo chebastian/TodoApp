@@ -18,6 +18,7 @@
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Padding" Value="10"/>
             </Style>
+            <Duration x:Key="AnimationSpeed">0:0:0.1</Duration>
         </StackPanel.Resources>
 
         <Grid>
@@ -39,6 +40,25 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid x:Name="item" >
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="Completed">
+                                    <Storyboard >
+                                        <DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/>
+                                        <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="100,0,0,0" Storyboard.TargetProperty="Margin"/>
+
+                                        <ParallelTimeline BeginTime="0:0:0.2">
+                                            <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="100,0,0,0" To="0" Storyboard.TargetProperty="Margin"/>
+                                        </ParallelTimeline>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="NotCompleted">
+                                    <Storyboard >
+                                        <DoubleAnimation From="0.0" To="1.0" Storyboard.TargetProperty="Opacity"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
@@ -63,6 +83,15 @@
                             </Behaviors:EventTrigger>
                             <Behaviors:EventTrigger EventName="MouseUp" SourceName="item">
                                 <Behaviors:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}},Path=DataContext.CompleteItemCommand}" CommandParameter="{Binding}"/>
+                            </Behaviors:EventTrigger>
+                            <Behaviors:DataTrigger Binding="{Binding Completed}" Value="True">
+                                <Behaviors:GoToStateAction StateName="Completed" />
+                            </Behaviors:DataTrigger>
+                            <Behaviors:DataTrigger Binding="{Binding Completed}" Value="False">
+                                <Behaviors:GoToStateAction StateName="NotCompleted" />
+                            </Behaviors:DataTrigger>
+                            <Behaviors:EventTrigger EventName="AnimationComplete">
+                                <Behaviors:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}},Path=DataContext.RemoveCommand}" CommandParameter="{Binding}"/>
                             </Behaviors:EventTrigger>
                         </Behaviors:Interaction.Triggers>
 
