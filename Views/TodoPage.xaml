@@ -32,7 +32,7 @@
                     </Behaviors:KeyTrigger>
                 </Behaviors:Interaction.Triggers>
             </TextBox>
-            <Button Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
+            <Button Padding="20" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
         </Grid>
 
         <ItemsControl ItemsSource="{Binding Items}">

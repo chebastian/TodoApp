@@ -55,11 +55,6 @@ namespace ViewModels
         private void OnCompleteItem(object obj)
         {
             Todo.Complete((obj as TodoItemViewModel).Item);
-            //Items = new ObservableCollection<TodoItemViewModel>(
-            //    Todo.Items.Select(x => new TodoItemViewModel(x)).ToList() 
-            //    ); 
-
-
 
             var todolist = Todo.Items;
             foreach (var item in Items)
@@ -89,11 +84,6 @@ namespace ViewModels
         private void OnRemove(object obj)
         {
             Todo.Remove((obj as TodoItemViewModel).Item);
-            //Items = new ObservableCollection<TodoItemViewModel>(
-            //    Todo.Items.Select(x => new TodoItemViewModel(x)).ToList() 
-            //    ); 
-
-
 
             var todolist = Todo.Items;
             var toRemove = new List<TodoItemViewModel>();
