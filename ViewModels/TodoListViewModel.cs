@@ -50,6 +50,17 @@ namespace ViewModels
             CompleteItemCommand = new RelayCommand(OnCompleteItem);
             Todo = new Todo.TodoList();
             Items = new ObservableCollection<TodoItemViewModel>();
+
+            SaveCommand = new RelayCommand(OnSave);
+            LoadCommand = new RelayCommand(OnLoad);
+        }
+
+        private void OnSave(object obj)
+        {
+        }
+
+        private void OnLoad(object obj)
+        {
         }
 
         private void OnCompleteItem(object obj)
@@ -59,6 +70,8 @@ namespace ViewModels
 
         public ObservableCollection<TodoItemViewModel> Items { get; set; }
 
+        public ICommand SaveCommand { get; set; }
+        public ICommand LoadCommand { get; set; } 
         public ICommand AddCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand CompleteItemCommand { get; set; }
