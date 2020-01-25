@@ -21,6 +21,12 @@ namespace Views
         public TodoPage()
         {
             InitializeComponent();
+            Loaded += TodoPage_Loaded;
+        }
+
+        private void TodoPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            nameBox.Focus();
         }
 
         private void FocusOnText(object sender, RoutedEventArgs e)
