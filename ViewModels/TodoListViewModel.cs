@@ -54,15 +54,7 @@ namespace ViewModels
 
         private void OnCompleteItem(object obj)
         {
-            Todo.Complete((obj as TodoItemViewModel).Item);
-
-            var todolist = Todo.Items;
-            foreach (var item in Items)
-            {
-                todolist.Contains(item.Item);
-                item.Item = todolist.First(x => x.Name == item.Name);
-            }
-            OnPropertyChanged(nameof(Items));
+            (obj as TodoItemViewModel).Item = Todo.Complete((obj as TodoItemViewModel).Item);
         }
 
         public ObservableCollection<TodoItemViewModel> Items { get; set; }
@@ -84,25 +76,9 @@ namespace ViewModels
         private void OnRemove(object obj)
         {
             Todo.Remove((obj as TodoItemViewModel).Item);
+            Items.Remove((obj as TodoItemViewModel));
 
-            var todolist = Todo.Items;
-            var toRemove = new List<TodoItemViewModel>();
-            foreach (var item in Items)
-            {
-                if (todolist.Contains(item.Item))
-                {
-                    item.Item = todolist.First(x => x.Name == item.Name);
-                }
-                else
-                {
-                    toRemove.Add(item);
-                }
-            }
-
-            foreach (var item in toRemove)
-                Items.Remove(item);
-
-            OnPropertyChanged(nameof(Items));
+            //OnPropertyChanged(nameof(Items));
         }
 
         private void OnAdd(object obj)

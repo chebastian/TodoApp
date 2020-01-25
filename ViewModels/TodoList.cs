@@ -32,13 +32,15 @@ namespace Todo
             return item;
         }
 
-        public void Complete(TodoItem todo)
+        public TodoItem Complete(TodoItem todo)
         {
             var theItem = Items.FirstOrDefault(x => x.Name == todo.Name);
             if(theItem != null)
             {
                 theItem.Completed = true;
             }
+
+            return theItem;
         }
 
         public void Remove(TodoItem item)
