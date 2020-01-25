@@ -8,9 +8,21 @@
 
   <ItemGroup>
     <Compile Remove="samples\**" />
+    <Compile Remove="ViewModels\**" />
+    <Compile Remove="ViewModelTest\**" />
+    <Compile Remove="Views\**" />
     <EmbeddedResource Remove="samples\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
+    <EmbeddedResource Remove="ViewModelTest\**" />
+    <EmbeddedResource Remove="Views\**" />
     <None Remove="samples\**" />
+    <None Remove="ViewModels\**" />
+    <None Remove="ViewModelTest\**" />
+    <None Remove="Views\**" />
     <Page Remove="samples\**" />
+    <Page Remove="ViewModels\**" />
+    <Page Remove="ViewModelTest\**" />
+    <Page Remove="Views\**" />
   </ItemGroup>
 
   <ItemGroup>
