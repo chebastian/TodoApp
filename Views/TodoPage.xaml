@@ -61,7 +61,7 @@
                             <Behaviors:EventTrigger EventName="MouseLeave" SourceName="item">
                                 <Behaviors:ChangePropertyAction TargetName="chkComplete" PropertyName="Visibility" Value="Collapsed"/>
                             </Behaviors:EventTrigger>
-                            <Behaviors:EventTrigger EventName="PreviewMouseDown" SourceName="item">
+                            <Behaviors:EventTrigger EventName="MouseUp" SourceName="item">
                                 <Behaviors:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}},Path=DataContext.CompleteItemCommand}" CommandParameter="{Binding}"/>
                             </Behaviors:EventTrigger>
                         </Behaviors:Interaction.Triggers>
