@@ -29,7 +29,7 @@
         <ItemsControl ItemsSource="{Binding Items}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" x:Name="item" Background="HotPink">
+                    <StackPanel Orientation="Horizontal" x:Name="item" >
                         <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
                         <StackPanel Orientation="Horizontal" x:Name="chkComplete" Visibility="Collapsed">
                             <CheckBox VerticalAlignment="Center"  IsChecked="{Binding Completed, Mode=OneWay}" />
@@ -50,6 +50,7 @@
 
                         <StackPanel.Style>
                             <Style TargetType="StackPanel">
+                                <Setter Property="Background" Value="HotPink"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Completed}" Value="True">
                                         <Setter Property="Background" Value="Green"/>
