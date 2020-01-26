@@ -19,6 +19,7 @@
                 <Setter Property="Padding" Value="10"/>
             </Style>
             <Duration x:Key="AnimationSpeed">0:0:0.1</Duration>
+            <Duration x:Key="AddSpeed">0:0:0.2</Duration>
         </StackPanel.Resources>
 
         <Grid>
@@ -54,7 +55,14 @@
                                 </VisualState>
                                 <VisualState x:Name="NotCompleted">
                                     <Storyboard >
-                                        <DoubleAnimation From="0.0" To="1.0" Storyboard.TargetProperty="Opacity"/>
+                                        <DoubleAnimation Duration="{StaticResource AddSpeed}" From="0.0" To="1.0" Storyboard.TargetProperty="Opacity"/>
+                                        <ThicknessAnimation Duration="{StaticResource AddSpeed}" From="-50" To="0" Storyboard.TargetProperty="Margin"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Removed">
+                                    <Storyboard >
+                                        <DoubleAnimation From="1.0" To="0.0" Storyboard.TargetProperty="Opacity"/>
+                                        <DoubleAnimation To="0.0" Storyboard.TargetProperty="Height"/>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>

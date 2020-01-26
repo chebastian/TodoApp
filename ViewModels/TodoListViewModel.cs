@@ -29,6 +29,15 @@ namespace ViewModels
             }
         }
 
+        private bool removed;
+
+        public bool Removed
+        {
+            get { return removed; }
+            set { removed = value;OnPropertyChanged(); }
+        }
+
+
         public bool Completed
         {
             get => Item.Completed;
