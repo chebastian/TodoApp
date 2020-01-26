@@ -71,7 +71,7 @@ namespace ViewModels
         public ObservableCollection<TodoItemViewModel> Items { get; set; }
 
         public ICommand SaveCommand { get; set; }
-        public ICommand LoadCommand { get; set; } 
+        public ICommand LoadCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand CompleteItemCommand { get; set; }
@@ -96,10 +96,10 @@ namespace ViewModels
 
         private void OnAdd(object obj)
         {
-            Todo.Add(NextTodoName);
-            Items = new ObservableCollection<TodoItemViewModel>(
-                Todo.Items.Select(x => new TodoItemViewModel(x)).ToList()
-                );
+            var added = Todo.Add(NextTodoName);
+
+            var newItem = new TodoItemViewModel(added);
+            Items.Add(newItem);
 
             OnPropertyChanged(nameof(Items));
             NextTodoName = "";
