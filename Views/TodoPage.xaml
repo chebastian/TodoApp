@@ -70,7 +70,6 @@
 
                         <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
                         <StackPanel Grid.Column="2" Orientation="Horizontal" x:Name="chkComplete" Visibility="Collapsed">
-                            <!--<CheckBox VerticalAlignment="Center"  IsChecked="{Binding Completed, Mode=OneWay}" />-->
                             <Button Content="Remove" CommandParameter="{Binding}" Command="{Binding Path=DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}}}" />
                         </StackPanel>
                         <Behaviors:Interaction.Triggers>
