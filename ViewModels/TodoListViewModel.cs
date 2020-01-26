@@ -90,8 +90,6 @@ namespace ViewModels
         {
             Todo.Remove((obj as TodoItemViewModel).Item);
             Items.Remove((obj as TodoItemViewModel));
-
-            //OnPropertyChanged(nameof(Items));
         }
 
         private void OnAdd(object obj)
