@@ -57,11 +57,17 @@ namespace ViewModels
             AddCommand = new RelayCommand(OnAdd);
             RemoveCommand = new RelayCommand(OnRemove);
             CompleteItemCommand = new RelayCommand(OnCompleteItem);
+            PreRemoveCommand = new RelayCommand(OnPreRemove);
             Todo = new Todo.TodoList();
             Items = new ObservableCollection<TodoItemViewModel>();
 
             SaveCommand = new RelayCommand(OnSave);
             LoadCommand = new RelayCommand(OnLoad);
+        }
+
+        private void OnPreRemove(object obj)
+        {
+            ToRemove = obj as TodoItemViewModel;
         }
 
         private void OnSave(object obj)
@@ -83,6 +89,7 @@ namespace ViewModels
         public ICommand LoadCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
+        public ICommand PreRemoveCommand { get; set; }
         public ICommand CompleteItemCommand { get; set; }
         public TodoList Todo { get; }
 
@@ -94,6 +101,8 @@ namespace ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public TodoItemViewModel ToRemove { get; private set; }
 
         private void OnRemove(object obj)
         {

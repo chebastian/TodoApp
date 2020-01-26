@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModels;
 
 namespace Views
 {
@@ -32,6 +33,12 @@ namespace Views
         private void FocusOnText(object sender, RoutedEventArgs e)
         {
             nameBox.Focus();
+        }
+
+        private void RemoveCompleted(object sender, EventArgs e)
+        {
+            var vm = (DataContext as TodoListViewModel);
+            vm.RemoveCommand.Execute(vm.ToRemove);
         }
     }
 }
