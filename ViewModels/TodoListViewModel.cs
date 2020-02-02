@@ -67,6 +67,7 @@ namespace ViewModels
             Todo = new Todo.TodoList();
             Items = new ObservableCollection<TodoItemViewModel>();
 
+            SerializeLocation = "./saved.txt";
             SaveCommand = new RelayCommand(OnSave);
             LoadCommand = new RelayCommand(OnLoad);
         }
@@ -76,15 +77,15 @@ namespace ViewModels
             ToRemove = obj as TodoItemViewModel;
         }
 
-        private void OnSave(object obj)
+        private async void OnSave(object obj)
         {
-            var saver = new TodoItemSaver();
-            saver.Save(Todo.Items);
+            var saver = new TodoItemSaver(SerializeLocation);
+            await saver.Save(Todo.Items);
         }
 
         private async void OnLoad(object obj)
         {
-            var loader = new TodoLoader();
+            var loader = new TodoLoader(SerializeLocation);
             Todo.Items.Clear();
             Items.Clear();
             await foreach (var item in loader.Items())
@@ -119,6 +120,7 @@ namespace ViewModels
         }
 
         public TodoItemViewModel ToRemove { get; private set; }
+        public string SerializeLocation { get; private set; }
 
         private void OnRemove(object obj)
         {

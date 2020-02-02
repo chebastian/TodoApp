@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Todo;
+using ViewModels;
 using Xunit;
 
 namespace ViewModelTest
@@ -57,6 +58,33 @@ namespace ViewModelTest
             todo.Remove(item);
 
             Assert.Equal(todo.Items.Count, 0); 
+        }
+    }
+
+
+    public class TodoSerializerTest
+    {
+        [Fact]
+        public void SerializeingProducesTheCorrecSTrings()
+        {
+            //It saves completed items
+            Assert.Equal("one,True", TodoItemSerializer.AsSeralizedString(new TodoItem("one") { Completed = true }));
+
+            //And non completed ones
+            Assert.Equal("two,False", TodoItemSerializer.AsSeralizedString(new TodoItem("two") ));
+        }
+
+        [Fact]
+        public void ItCanDeserializeItems()
+        {
+            //It saves completed items
+            var expectedItem = new TodoItem("one") { Completed = true };
+            Assert.Equal(expectedItem, TodoItemDeserizliser.FromSerializedString("one,True"));
+
+            //And non completed ones
+
+            var expectedUncompleted = new TodoItem("two") { Completed = false };
+            Assert.Equal(expectedUncompleted, TodoItemDeserizliser.FromSerializedString("two,False"));
         }
     }
 }
