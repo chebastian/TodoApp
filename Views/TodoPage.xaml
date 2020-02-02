@@ -19,7 +19,7 @@
                 <Setter Property="Padding" Value="10"/>
             </Style>
             <Duration x:Key="AnimationSpeed">0:0:0.1</Duration>
-            <Duration x:Key="AddSpeed">0:0:0.2</Duration>
+            <Duration x:Key="AddSpeed">0:0:0.1</Duration>
         </StackPanel.Resources>
 
         <Grid x:Name="root">
@@ -40,16 +40,21 @@
         <ItemsControl ItemsSource="{Binding Items}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="item" >
+                    <Grid x:Name="item">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup>
                                 <VisualState x:Name="Completed">
                                     <Storyboard >
-                                        <DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/>
-                                        <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="10,0,0,0" Storyboard.TargetProperty="Margin"/>
+                                        <!--<DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/> <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="10,0,0,0" Storyboard.TargetProperty="Margin"/>
 
                                         <ParallelTimeline BeginTime="0:0:0.2">
                                             <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="10,0,0,0" To="0" Storyboard.TargetProperty="Margin"/>
+                                        </ParallelTimeline>-->
+                                        <DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/>
+                                        <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="10" Storyboard.TargetProperty="Margin"/>
+
+                                        <ParallelTimeline BeginTime="0:0:0.1">
+                                            <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="10" To="0" Storyboard.TargetProperty="Margin"/>
                                         </ParallelTimeline>
                                     </Storyboard>
                                 </VisualState>
@@ -61,7 +66,8 @@
                                 </VisualState>
                                 <VisualState x:Name="Removed">
                                     <Storyboard Completed="RemoveCompleted">
-                                        <ThicknessAnimation  Duration="0:0:0.2" From="0" To="1000,0,0,0" Storyboard.TargetProperty="Margin" />
+                                        <ThicknessAnimation  Duration="0:0:0.3" From="0" To="1000,0,0,0" Storyboard.TargetProperty="Margin" />
+                                        <DoubleAnimation From="60" Duration="0:0:0.3" To="0.0" Storyboard.TargetProperty="Height" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Todo;
 
@@ -34,7 +35,7 @@ namespace ViewModels
         public bool Removed
         {
             get { return removed; }
-            set { removed = value;OnPropertyChanged(); }
+            set { removed = value; OnPropertyChanged(); }
         }
 
 
@@ -50,6 +51,11 @@ namespace ViewModels
     }
     public class TodoListViewModel : ViewModelBase
     {
+        public interface ITodoItemSaver
+        {
+            Task<bool> Save(List<TodoItem> items);
+        }
+
         private string nextTodoName;
 
         public TodoListViewModel()
@@ -72,10 +78,20 @@ namespace ViewModels
 
         private void OnSave(object obj)
         {
+            var saver = new TodoItemSaver();
+            saver.Save(Todo.Items);
         }
 
-        private void OnLoad(object obj)
+        private async void OnLoad(object obj)
         {
+            var loader = new TodoLoader();
+            Todo.Items.Clear();
+            Items.Clear();
+            await foreach (var item in loader.Items())
+            {
+                Todo.Items.Add(item);
+                Items.Add(new TodoItemViewModel(item));
+            }
         }
 
         private void OnCompleteItem(object obj)
