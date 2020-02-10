@@ -14,7 +14,7 @@ namespace ViewModels
     }
 
     public class TodoItemSerializer
-    { 
+    {
         public static string AsSeralizedString(TodoItem item)
         {
             return $"{item.Name},{item.Completed}";
@@ -26,7 +26,7 @@ namespace ViewModels
         public static TodoItem FromSerializedString(string item)
         {
             var split = item.Split(',');
-            return new TodoItem(split[0]) { Completed=bool.Parse(split[1])};
+            return new TodoItem(split[0]) { Completed = bool.Parse(split[1]) };
         }
     }
 
@@ -52,7 +52,7 @@ namespace ViewModels
 
                 try
                 {
-                    File.WriteAllLines(_path, lines); 
+                    File.WriteAllLines(_path, lines);
                 }
                 catch
                 {
@@ -72,10 +72,13 @@ namespace ViewModels
 
         public async IAsyncEnumerable<TodoItem> Items()
         {
-            var lines  = File.ReadAllLines(Location);
-            foreach(var line in lines)
+            if (File.Exists(Location))
             {
-                yield return TodoItemDeserizliser.FromSerializedString(line); 
+                var lines = File.ReadAllLines(Location);
+                foreach (var line in lines)
+                {
+                    yield return TodoItemDeserizliser.FromSerializedString(line);
+                }
             }
 
             //yield return new TodoItem("First");
