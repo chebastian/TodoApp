@@ -44,23 +44,32 @@ namespace TodoConsoleApp
         }
 
         internal void Execute(Commands theCommand, string[] v)
-        { 
-            if(theCommand == Commands.List)
+        {
+            if (theCommand == Commands.List)
             {
                 ListTodos(v[0]);
             }
-            else if(theCommand == Commands.Add)
+            else
             {
-                AddTodo(v[0], v[1]);
+                if (theCommand == Commands.Add)
+                {
+                    AddTodo(v[1], v[2]);
+                }
+                else if (theCommand == Commands.Complete)
+                {
+                    CompleteItem(v[1], v[2]);
+                }
+
+                _vm.SaveCommand.Execute(null);
+                ListTodos(v[0]);
             }
-            else if(theCommand == Commands.Complete)
-            {
-                CompleteItem(v[0], v[1]);
-            }
+
         }
 
         private void CompleteItem(string v1, string v2)
         {
+            _vm.LoadCommand.Execute(null);
+
             var theItem = _vm.Items.Where(x => x.Name == v1).FirstOrDefault();
             _vm.CompleteItemCommand.Execute(theItem);
         }
@@ -90,21 +99,25 @@ namespace TodoConsoleApp
         static void Main(string[] args)
         {
             var app = new App();
-            //Commands theCommand = ParseArgs(args);
 
-            Commands theCommand = Commands.List;
-            var listofArgs = new[] {"filename","something new","file.txt" };
-            if(theCommand != Commands.Help)
+            //var listofArgs = new[] { "filename", "-list", "file.txt" };
+            //var listofArgs = new[] { "filename", "-add", "theItem", "file.txt" };
+            //var listofArgs = new[] { "filename", "-remove","theItem", "file.txt" };
+            var listofArgs = new[] { "filename", "-complete","theItem", "file.txt" };
+
+            Commands theCommand = ParseArgs(listofArgs);
+
+            if (theCommand != Commands.Help)
             {
-                app.Execute(theCommand,listofArgs.Skip(1).ToArray()); 
+                app.Execute(theCommand, listofArgs.Skip(1).ToArray());
             }
- 
+
             Console.WriteLine("Help: <TODO>");
         }
 
         private static Commands ParseArgs(string[] args)
         {
-            if(args.Length > 0)
+            if (args.Length > 0)
             {
                 var fst = args[1];
                 if (fst == "-list")
@@ -113,6 +126,8 @@ namespace TodoConsoleApp
                     return Commands.Add;
                 else if (fst == "-remove")
                     return Commands.Remove;
+                else if (fst == "-complete")
+                    return Commands.Complete;
             }
 
             return Commands.Help;
