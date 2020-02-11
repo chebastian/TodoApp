@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ViewModels;
 
 namespace TodoConsoleApp
@@ -83,9 +84,13 @@ namespace TodoConsoleApp
             _vm.SaveCommand.Execute(null);
         }
 
-        private async void ListTodos(string v)
+        private void ListTodos(string v)
         {
             _vm.LoadCommand.Execute(null);
+            while (!_vm.LoadIsReady)
+            {
+            }
+
             foreach (var item in _vm.Items)
             {
                 var checkmark = item.Completed ? "[x]" : "[ ]";
@@ -96,20 +101,22 @@ namespace TodoConsoleApp
 
     class Program
     {
+
         static void Main(string[] args)
         {
             var app = new App();
 
             //var listofArgs = new[] { "filename", "-list", "file.txt" };
-            //var listofArgs = new[] { "filename", "-add", "theItem", "file.txt" };
+            //var listofArgs = new[] { "filename", "-complete", "test", "file.txt" };
             //var listofArgs = new[] { "filename", "-remove","theItem", "file.txt" };
-            var listofArgs = new[] { "filename", "-complete","theItem", "file.txt" };
+            //var listofArgs = new[] { "filename", "-complete", "one", "file.txt" };
+            var listofArgs = args;
 
             Commands theCommand = ParseArgs(listofArgs);
 
             if (theCommand != Commands.Help)
             {
-                app.Execute(theCommand, listofArgs.Skip(1).ToArray());
+                app.Execute(theCommand, listofArgs.ToArray());
             }
 
             Console.WriteLine("Help: <TODO>");
@@ -119,7 +126,7 @@ namespace TodoConsoleApp
         {
             if (args.Length > 0)
             {
-                var fst = args[1];
+                var fst = args[0];
                 if (fst == "-list")
                     return Commands.List;
                 else if (fst == "-add")

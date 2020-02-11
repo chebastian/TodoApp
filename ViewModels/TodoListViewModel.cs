@@ -70,6 +70,8 @@ namespace ViewModels
             SerializeLocation = "./saved.txt";
             SaveCommand = new RelayCommand(OnSave);
             LoadCommand = new RelayCommand(OnLoad);
+            FileIsReady = true;
+            LoadIsReady = true;
         }
 
         private void OnPreRemove(object obj)
@@ -79,12 +81,21 @@ namespace ViewModels
 
         private async void OnSave(object obj)
         {
+            FileIsReady = false;
             var saver = new TodoItemSaver(SerializeLocation);
             await saver.Save(Todo.Items);
+            FileIsReady = true;
+
         }
 
         private async void OnLoad(object obj)
         {
+            LoadIsReady = false;
+            while(!FileIsReady)
+            {
+                await Task.Delay(20);
+            }
+
             var loader = new TodoLoader(SerializeLocation);
             Todo.Items.Clear();
             Items.Clear();
@@ -93,6 +104,8 @@ namespace ViewModels
                 Todo.Items.Add(item);
                 Items.Add(new TodoItemViewModel(item));
             }
+
+            LoadIsReady = true;
         }
 
         private void OnCompleteItem(object obj)
@@ -121,6 +134,8 @@ namespace ViewModels
 
         public TodoItemViewModel ToRemove { get; private set; }
         public string SerializeLocation { get; private set; }
+        public bool FileIsReady { get; private set; }
+        public bool LoadIsReady { get; private set; }
 
         private void OnRemove(object obj)
         {
