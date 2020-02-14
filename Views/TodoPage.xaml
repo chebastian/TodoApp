@@ -34,7 +34,7 @@
                     </Behaviors:KeyTrigger>
                 </Behaviors:Interaction.Triggers>
             </TextBox>
-            <Button Padding="20" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
+            <Button Background="Black" Style="{StaticResource BasicButton}" Padding="20" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
         </Grid>
 
         <ItemsControl ItemsSource="{Binding Items}">
@@ -83,7 +83,7 @@
 
                         <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
                         <StackPanel Grid.Column="2" Orientation="Horizontal" x:Name="chkComplete" Visibility="Collapsed">
-                            <Button Content="Remove" CommandParameter="{Binding}">
+                            <Button Style="{StaticResource BasicButton}" Content="Remove" CommandParameter="{Binding}">
                                 <Behaviors:Interaction.Triggers>
                                     <Behaviors:EventTrigger EventName="Click">
                                         <Behaviors:GoToStateAction StateName="Removed"/>
@@ -134,8 +134,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button Content="Save" Command="{Binding SaveCommand}"/>
-            <Button Grid.Column="1" Content="Load" Command="{Binding LoadCommand}"/>
+            <Button Style="{StaticResource BasicButton}" Content="Save" Command="{Binding SaveCommand}"/>
+            <Button Style="{StaticResource BasicButton}" Grid.Column="1" Content="Load" Command="{Binding LoadCommand}"/>
 
         </Grid>
     </StackPanel>
