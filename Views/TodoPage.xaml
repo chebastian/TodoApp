@@ -45,11 +45,6 @@
                             <VisualStateGroup>
                                 <VisualState x:Name="Completed">
                                     <Storyboard >
-                                        <!--<DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/> <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="10,0,0,0" Storyboard.TargetProperty="Margin"/>
-
-                                        <ParallelTimeline BeginTime="0:0:0.2">
-                                            <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="10,0,0,0" To="0" Storyboard.TargetProperty="Margin"/>
-                                        </ParallelTimeline>-->
                                         <DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/>
                                         <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="10" Storyboard.TargetProperty="Margin"/>
 
@@ -96,7 +91,6 @@
                             <Behaviors:EventTrigger EventName="MouseEnter" SourceName="item">
                                 <Behaviors:ChangePropertyAction TargetName="chkComplete" PropertyName="Visibility" Value="Visible"/>
                             </Behaviors:EventTrigger>
-
                             <Behaviors:EventTrigger EventName="MouseLeave" SourceName="item">
                                 <Behaviors:ChangePropertyAction TargetName="chkComplete" PropertyName="Visibility" Value="Collapsed"/>
                             </Behaviors:EventTrigger>
