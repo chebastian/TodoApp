@@ -24,11 +24,8 @@
                                 <VisualState x:Name="Normal" />
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
-                                        <ColorAnimation 
-                                            Storyboard.TargetProperty="Color" 
-                                            Storyboard.TargetName="rootBackground" 
-                                            To="Black" 
-                                            Duration="{StaticResource AnimationSpeed}"/>
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                        From="Orange" To="White" Duration="0:0:0.3"/>
                                     </Storyboard> 
                                 </VisualState>
                                 <VisualState x:Name="MouseOver" >
