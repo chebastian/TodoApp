@@ -128,10 +128,8 @@
                         <Behaviors:Interaction.Triggers>
                             <Behaviors:EventTrigger EventName="MouseEnter" SourceName="item">
                                 <Behaviors:GoToStateAction StateName="SlideIn"/>
-                                <!--<Behaviors:ChangePropertyAction TargetName="chkComplete" PropertyName="Visibility" Value="Visible"/>-->
                             </Behaviors:EventTrigger>
                             <Behaviors:EventTrigger EventName="MouseLeave" SourceName="item">
-                                <!--<Behaviors:ChangePropertyAction TargetName="chkComplete" PropertyName="Visibility" Value="Collapsed"/>-->
                                 <Behaviors:GoToStateAction StateName="SlideOut"/>
                             </Behaviors:EventTrigger>
                             <Behaviors:EventTrigger EventName="MouseUp" SourceName="item">
