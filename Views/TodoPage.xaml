@@ -97,22 +97,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
-                        <StackPanel Grid.Column="2" Orientation="Horizontal" x:Name="chkComplete" Visibility="Visible">
-                            <StackPanel.Style>
-                                <Style TargetType="StackPanel">
-                                    <Style.Triggers>
-                                        <!--<Trigger Property="Visibility" Value="Visible">
-                                            <Trigger.EnterActions>
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" From="100" To="0" Duration="0:0:0.1"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </Trigger.EnterActions>
-                                        </Trigger>-->
-                                    </Style.Triggers>
-                                </Style>
-                            </StackPanel.Style>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" x:Name="chkComplete" Visibility="Collapsed">
                             <Button Style="{StaticResource BasicButton}" Content="Remove" CommandParameter="{Binding}">
                                 <Behaviors:Interaction.Triggers>
                                     <Behaviors:EventTrigger EventName="Click">
@@ -125,9 +110,11 @@
                                 <TranslateTransform/>
                             </StackPanel.RenderTransform>
                         </StackPanel>
+
                         <Behaviors:Interaction.Triggers>
                             <Behaviors:EventTrigger EventName="MouseEnter" SourceName="item">
                                 <Behaviors:GoToStateAction StateName="SlideIn"/>
+                                <Behaviors:ChangePropertyAction TargetName="chkComplete" PropertyName="Visibility" Value="Visible"/>
                             </Behaviors:EventTrigger>
                             <Behaviors:EventTrigger EventName="MouseLeave" SourceName="item">
                                 <Behaviors:GoToStateAction StateName="SlideOut"/>
