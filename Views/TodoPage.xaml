@@ -65,6 +65,26 @@
                                         <DoubleAnimation From="60" Duration="0:0:0.3" To="0.0" Storyboard.TargetProperty="Height" />
                                     </Storyboard>
                                 </VisualState>
+                                <VisualState x:Name="SlideIn">
+                                    <Storyboard>
+                                            <DoubleAnimation 
+                                                Storyboard.TargetName="chkComplete"
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                                From="100" 
+                                                To="0"
+                                                Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="SlideOut">
+                                    <Storyboard>
+                                            <DoubleAnimation 
+                                                Storyboard.TargetName="chkComplete"
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                                From="0" 
+                                                To="100"
+                                                Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Grid.RowDefinitions>
@@ -77,11 +97,11 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
-                        <StackPanel Grid.Column="2" Orientation="Horizontal" x:Name="chkComplete" Visibility="Collapsed">
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" x:Name="chkComplete" Visibility="Visible">
                             <StackPanel.Style>
                                 <Style TargetType="StackPanel">
                                     <Style.Triggers>
-                                        <!--<Trigger Property="Visibility"  Value="Visible">
+                                        <!--<Trigger Property="Visibility" Value="Visible">
                                             <Trigger.EnterActions>
                                                 <BeginStoryboard>
                                                     <Storyboard>
@@ -107,10 +127,12 @@
                         </StackPanel>
                         <Behaviors:Interaction.Triggers>
                             <Behaviors:EventTrigger EventName="MouseEnter" SourceName="item">
-                                <Behaviors:ChangePropertyAction TargetName="chkComplete" PropertyName="Visibility" Value="Visible"/>
+                                <Behaviors:GoToStateAction StateName="SlideIn"/>
+                                <!--<Behaviors:ChangePropertyAction TargetName="chkComplete" PropertyName="Visibility" Value="Visible"/>-->
                             </Behaviors:EventTrigger>
                             <Behaviors:EventTrigger EventName="MouseLeave" SourceName="item">
-                                <Behaviors:ChangePropertyAction TargetName="chkComplete" PropertyName="Visibility" Value="Collapsed"/>
+                                <!--<Behaviors:ChangePropertyAction TargetName="chkComplete" PropertyName="Visibility" Value="Collapsed"/>-->
+                                <Behaviors:GoToStateAction StateName="SlideOut"/>
                             </Behaviors:EventTrigger>
                             <Behaviors:EventTrigger EventName="MouseUp" SourceName="item">
                                 <Behaviors:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}},Path=DataContext.CompleteItemCommand}" CommandParameter="{Binding}"/>
