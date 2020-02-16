@@ -22,7 +22,7 @@
             <Duration x:Key="AddSpeed">0:0:0.1</Duration>
         </StackPanel.Resources>
 
-        <Grid x:Name="root">
+        <Grid x:Name="root" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -40,7 +40,7 @@
         <ItemsControl ItemsSource="{Binding Items}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="item">
+                    <Grid x:Name="item" Background="Honeydew">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
@@ -88,9 +88,15 @@
                         </Behaviors:Interaction.Triggers>
 
                         <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup>
+                            <VisualStateGroup x:Name="Complete">
                                 <VisualState x:Name="Completed">
                                     <Storyboard >
+                                        <ColorAnimation 
+                                            Storyboard.TargetName="item"
+                                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                            To="Green" 
+                                            FillBehavior="HoldEnd"
+                                            Duration="0:0:0.3"/>
                                         <DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/>
                                         <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="10" Storyboard.TargetProperty="Margin"/>
 
@@ -98,7 +104,9 @@
                                             <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="10" To="0" Storyboard.TargetProperty="Margin"/>
                                         </ParallelTimeline>
                                     </Storyboard>
-                                </VisualState>
+                                </VisualState> 
+                            </VisualStateGroup>
+                            <VisualStateGroup>
                                 <VisualState x:Name="NotCompleted">
                                     <Storyboard >
                                         <DoubleAnimation Duration="{StaticResource AddSpeed}" From="0.0" To="1.0" Storyboard.TargetProperty="Opacity"/>
@@ -133,17 +141,6 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-
-                        <Grid.Style>
-                            <Style TargetType="Grid">
-                                <Setter Property="Background" Value="HotPink"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Completed}" Value="True">
-                                        <Setter Property="Background" Value="Green"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Grid.Style>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
