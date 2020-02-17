@@ -12,11 +12,15 @@
         <StackPanel.Resources>
             <Style x:Key="TextStyle" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Background" Value="{StaticResource Brush_TextblockBackground}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush_ItemForeground}"/>
                 <Setter Property="Padding" Value="5"/>
             </Style>
             <Style TargetType="TextBox">
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Padding" Value="10"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush_TextboxForeground}"/>
+                <Setter Property="Background" Value="{StaticResource Brush_TextboxBackground}"/>
             </Style>
             <Duration x:Key="AnimationSpeed">0:0:0.1</Duration>
             <Duration x:Key="AddSpeed">0:0:0.1</Duration>
@@ -34,13 +38,13 @@
                     </Behaviors:KeyTrigger>
                 </Behaviors:Interaction.Triggers>
             </TextBox>
-            <Button Background="#2D2A32" Style="{StaticResource BasicButton}" Padding="20" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
+            <Button Style="{StaticResource BasicButton}" Padding="20" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
         </Grid>
 
         <ItemsControl ItemsSource="{Binding Items}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="item" Background="#FAFDF6">
+                    <Grid x:Name="item" Background="{StaticResource Brush_ItemBackground}">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
@@ -94,12 +98,11 @@
                                         <ColorAnimation 
                                             Storyboard.TargetName="item"
                                             Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
-                                            To="#0EAD69" 
+                                            To="{StaticResource Brush_Item_Complete_Background}" 
                                             FillBehavior="HoldEnd"
                                             Duration="0:0:0.3"/>
                                         <DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/>
                                         <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="10" Storyboard.TargetProperty="Margin"/>
-
                                         <ParallelTimeline BeginTime="0:0:0.1">
                                             <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="10" To="0" Storyboard.TargetProperty="Margin"/>
                                         </ParallelTimeline>
