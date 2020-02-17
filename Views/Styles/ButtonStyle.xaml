@@ -4,10 +4,11 @@
                     xmlns:Behaviours="http://schemas.microsoft.com/xaml/behaviors">
 
     <Style TargetType="Button" x:Key="BasicButton">
-        <Setter Property="Foreground" Value="HotPink"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="FontFamily" Value="Consolas"/>
         <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Background" Value="#2D2A32"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -30,7 +31,7 @@
                                         <ColorAnimation 
                                             Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
                                             From="{TemplateBinding Background}" 
-                                            To="Aqua" 
+                                            To="#535057" 
                                             Duration="0:0:0.3"/>
                                     </Storyboard>
                                 </VisualState>

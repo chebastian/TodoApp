@@ -34,13 +34,13 @@
                     </Behaviors:KeyTrigger>
                 </Behaviors:Interaction.Triggers>
             </TextBox>
-            <Button Background="Black" Style="{StaticResource BasicButton}" Padding="20" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
+            <Button Background="#2D2A32" Style="{StaticResource BasicButton}" Padding="20" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
         </Grid>
 
         <ItemsControl ItemsSource="{Binding Items}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="item" Background="Honeydew">
+                    <Grid x:Name="item" Background="#FAFDF6">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
@@ -94,7 +94,7 @@
                                         <ColorAnimation 
                                             Storyboard.TargetName="item"
                                             Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
-                                            To="Green" 
+                                            To="#0EAD69" 
                                             FillBehavior="HoldEnd"
                                             Duration="0:0:0.3"/>
                                         <DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/>
