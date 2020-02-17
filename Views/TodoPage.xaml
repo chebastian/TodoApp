@@ -7,18 +7,18 @@
              xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
+    <StackPanel SnapsToDevicePixels="True">
 
         <StackPanel.Resources>
             <Style x:Key="TextStyle" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Background" Value="{StaticResource Brush_TextblockBackground}"/>
                 <Setter Property="Foreground" Value="{StaticResource Brush_ItemForeground}"/>
-                <Setter Property="Padding" Value="5"/>
+                <Setter Property="Padding" Value="4"/>
             </Style>
             <Style TargetType="TextBox">
                 <Setter Property="FontSize" Value="18"/>
-                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Padding" Value="12"/>
                 <Setter Property="Foreground" Value="{StaticResource Brush_TextboxForeground}"/>
                 <Setter Property="Background" Value="{StaticResource Brush_TextboxBackground}"/>
             </Style>
@@ -38,15 +38,15 @@
                     </Behaviors:KeyTrigger>
                 </Behaviors:Interaction.Triggers>
             </TextBox>
-            <Button Style="{StaticResource BasicButton}" Padding="20" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
+            <Button Style="{StaticResource BasicButton}" Padding="24" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
         </Grid>
 
         <ItemsControl ItemsSource="{Binding Items}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="item" Background="{StaticResource Brush_ItemBackground}">
+                    <Grid x:Name="item" Background="{StaticResource Brush_ItemBackground}"  Margin="0,1,0,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
+                            <RowDefinition Height="36" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -102,9 +102,9 @@
                                             FillBehavior="HoldEnd"
                                             Duration="0:0:0.3"/>
                                         <DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/>
-                                        <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="10" Storyboard.TargetProperty="Margin"/>
+                                        <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="12" Storyboard.TargetProperty="Margin"/>
                                         <ParallelTimeline BeginTime="0:0:0.1">
-                                            <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="10" To="0" Storyboard.TargetProperty="Margin"/>
+                                            <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="12" To="0" Storyboard.TargetProperty="Margin"/>
                                         </ParallelTimeline>
                                     </Storyboard>
                                 </VisualState> 
@@ -113,7 +113,7 @@
                                 <VisualState x:Name="NotCompleted">
                                     <Storyboard >
                                         <DoubleAnimation Duration="{StaticResource AddSpeed}" From="0.0" To="1.0" Storyboard.TargetProperty="Opacity"/>
-                                        <ThicknessAnimation Duration="{StaticResource AddSpeed}" From="0,-10,0,0" To="0" Storyboard.TargetProperty="Margin"/>
+                                        <ThicknessAnimation Duration="{StaticResource AddSpeed}" From="0,-12,0,0" To="0,1,0,0" Storyboard.TargetProperty="Margin"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Removed">
