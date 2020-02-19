@@ -26,5 +26,21 @@ namespace TodoList
             InitializeComponent();
             TodoPage.DataContext = new TodoListViewModel();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.CurrentTheme == Themes.Dark)
+                App.CurrentTheme = Themes.Light;
+            else
+                App.CurrentTheme = Themes.Dark;
+
+            foreach(var res in Resources.MergedDictionaries)
+            {
+                if(res is ThemeResourceDictionary theme)
+                {
+                    theme.UpdateTheme();
+                }
+            }
+        }
     }
 }

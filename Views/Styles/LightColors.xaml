@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Views.Styles">
+
+    <Color x:Key="Color_ButtonHoverBackground">HotPink</Color> 
+    <SolidColorBrush x:Key="Brush_ItemBackground" Color="HotPink"/>
+    <SolidColorBrush x:Key="Brush_ItemForeground" Color="HotPink"/>
+
+    <SolidColorBrush x:Key="Brush_Item_Complete_Foreground" Color="HotPink"/>
+    <Color x:Key="Brush_Item_Complete_Background" >HotPink</Color>
+
+    <SolidColorBrush x:Key="Brush_ButtonForeground" Color="HotPink"/>
+    <SolidColorBrush x:Key="Brush_ButtonBackground" Color="HotPink"/>
+    <SolidColorBrush x:Key="Brush_ButtonHoverBackgournd" Color="HotPink"/>
+    <SolidColorBrush x:Key="Brush_ButtonClickBackground" Color="HotPink"/>
+
+    <SolidColorBrush x:Key="Brush_TextboxForeground_Light" Color="HotPink"/>
+    <SolidColorBrush x:Key="Brush_TextboxForeground" Color="HotPink"/>
+    <SolidColorBrush x:Key="Brush_TextboxBackground" Color="HotPink"/>
+    <SolidColorBrush x:Key="Brush_TextboxHintForeground" Color="HotPink"/>
+
+    <SolidColorBrush x:Key="Brush_TextblockBackground" Color="Transparent"/>
+
+</ResourceDictionary>

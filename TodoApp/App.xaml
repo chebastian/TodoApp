@@ -2,14 +2,18 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TodoList"
+             xmlns:views="clr-namespace:Views;assembly=Views"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
         <ResourceDictionary>
+
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Views;component/Styles/DarkColors.xaml"/>
+                <ResourceDictionary Source="/Views;component/Styles/LightColors.xaml"/>
                 <ResourceDictionary Source="/Views;component/Styles/ButtonStyle.xaml"/>
+                <local:ThemeResourceDictionary LightSource="/Views;component/Styles/LightColors.xaml" DarkSource="/Views;component/Styles/DarkColors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
         </ResourceDictionary>
 
     </Application.Resources>
