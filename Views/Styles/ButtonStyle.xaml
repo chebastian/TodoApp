@@ -7,11 +7,11 @@
         <Setter Property="Padding" Value="5"/>
         <Setter Property="FontFamily" Value="Consolas"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Background" Value="{StaticResource Brush_ButtonBackground}"/>
+        <Setter Property="Background" Value="{DynamicResource Brush_ButtonBackground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="RootBorder" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" TextBlock.Foreground="{StaticResource Brush_ButtonForeground}" >
+                    <Border x:Name="RootBorder" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" TextBlock.Foreground="{DynamicResource Brush_ButtonForeground}" >
                         <Border.Resources>
                             <Duration x:Key="AnimationSpeed">0:0:0.1</Duration>
                         </Border.Resources>

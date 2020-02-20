@@ -34,13 +34,18 @@ namespace TodoList
             else
                 App.CurrentTheme = Themes.Dark;
 
-            foreach(var res in Resources.MergedDictionaries)
-            {
-                if(res is ThemeResourceDictionary theme)
-                {
-                    theme.UpdateTheme();
-                }
-            }
+            Resources.Clear();
+            Resources.MergedDictionaries.Clear();
+
+            Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri( "Shared.xaml",UriKind.Relative )});
+
+            //foreach(var res in Resources.MergedDictionaries)
+            //{
+            //    if(res is ThemeResourceDictionary theme)
+            //    {
+            //        theme.UpdateTheme();
+            //    }
+            //}
         }
     }
 }

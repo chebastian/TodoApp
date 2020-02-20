@@ -11,15 +11,15 @@
         <Grid.Resources>
             <Style x:Key="TextStyle" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="18"/>
-                <Setter Property="Background" Value="{StaticResource Brush_TextblockBackground}"/>
-                <Setter Property="Foreground" Value="{StaticResource Brush_ItemForeground}"/>
+                <Setter Property="Background" Value="{DynamicResource Brush_TextblockBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Brush_ItemForeground}"/>
                 <Setter Property="Padding" Value="4"/>
             </Style>
             <Style TargetType="TextBox">
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Padding" Value="12"/>
-                <Setter Property="Foreground" Value="{StaticResource Brush_TextboxForeground}"/>
-                <Setter Property="Background" Value="{StaticResource Brush_TextboxBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Brush_TextboxForeground}"/>
+                <Setter Property="Background" Value="{DynamicResource Brush_TextboxBackground}"/>
             </Style>
             <Duration x:Key="AnimationSpeed">0:0:0.1</Duration>
             <Duration x:Key="AddSpeed">0:0:0.1</Duration>
@@ -43,7 +43,7 @@
                     </Behaviors:KeyTrigger>
                 </Behaviors:Interaction.Triggers>
             </TextBox>
-            <Button Style="{StaticResource BasicButton}" Padding="24" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
+            <Button Style="{DynamicResource BasicButton}" Padding="24" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
         </Grid>
 
         <ItemsControl Grid.Row="1" ItemsSource="{Binding Items}" ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -58,7 +58,7 @@
             </ItemsControl.Template>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="item" Background="{StaticResource Brush_ItemBackground}"  Margin="0,1,0,0">
+                    <Grid x:Name="item" Background="{DynamicResource Brush_ItemBackground}"  Margin="0,1,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="36" />
                         </Grid.RowDefinitions>
@@ -68,9 +68,9 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
+                        <TextBlock Style="{DynamicResource TextStyle}" Text="{Binding Name}"/>
                         <StackPanel Grid.Column="2" Orientation="Horizontal" x:Name="chkComplete" Visibility="Collapsed">
-                            <Button Style="{StaticResource BasicButton}" Content="Remove" CommandParameter="{Binding}">
+                            <Button Style="{DynamicResource BasicButton}" Content="Remove" CommandParameter="{Binding}">
                                 <Behaviors:Interaction.Triggers>
                                     <Behaviors:EventTrigger EventName="Click">
                                         <Behaviors:GoToStateAction StateName="Removed"/>
@@ -112,13 +112,13 @@
                                         <ColorAnimation 
                                             Storyboard.TargetName="item"
                                             Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
-                                            To="{StaticResource Brush_Item_Complete_Background}" 
+                                            To="{DynamicResource Brush_Item_Complete_Background}" 
                                             FillBehavior="HoldEnd"
                                             Duration="0:0:0.3"/>
                                         <DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/>
-                                        <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="12" Storyboard.TargetProperty="Margin"/>
+                                        <ThicknessAnimation Duration="{DynamicResource AnimationSpeed}" From="0,0,0,0" To="12" Storyboard.TargetProperty="Margin"/>
                                         <ParallelTimeline BeginTime="0:0:0.1">
-                                            <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="12" To="0" Storyboard.TargetProperty="Margin"/>
+                                            <ThicknessAnimation Duration="{DynamicResource AnimationSpeed}" From="12" To="0" Storyboard.TargetProperty="Margin"/>
                                         </ParallelTimeline>
                                     </Storyboard>
                                 </VisualState> 
@@ -126,8 +126,8 @@
                             <VisualStateGroup>
                                 <VisualState x:Name="NotCompleted">
                                     <Storyboard >
-                                        <DoubleAnimation Duration="{StaticResource AddSpeed}" From="0.0" To="1.0" Storyboard.TargetProperty="Opacity"/>
-                                        <ThicknessAnimation Duration="{StaticResource AddSpeed}" From="0,-12,0,0" To="0,1,0,0" Storyboard.TargetProperty="Margin"/>
+                                        <DoubleAnimation Duration="{DynamicResource AddSpeed}" From="0.0" To="1.0" Storyboard.TargetProperty="Opacity"/>
+                                        <ThicknessAnimation Duration="{DynamicResource AddSpeed}" From="0,-12,0,0" To="0,1,0,0" Storyboard.TargetProperty="Margin"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Removed">
@@ -169,8 +169,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button Style="{StaticResource BasicButton}" Content="Save" Command="{Binding SaveCommand}"/>
-            <Button Style="{StaticResource BasicButton}" Grid.Column="1" Content="Load" Command="{Binding LoadCommand}"/>
+            <Button Style="{DynamicResource BasicButton}" Content="Save" Command="{Binding SaveCommand}"/>
+            <Button Style="{DynamicResource BasicButton}" Grid.Column="1" Content="Load" Command="{Binding LoadCommand}"/>
 
         </Grid>
     </Grid>

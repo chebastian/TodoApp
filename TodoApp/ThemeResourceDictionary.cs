@@ -16,11 +16,12 @@ namespace TodoList
         private Uri darkSource;
         private Uri lightSource;
 
+ 
         public void UpdateTheme()
         {
             var val = App.CurrentTheme == Themes.Dark ? DarkSource : LightSource;
             if (val != null)
-                base.Source = val;
+                base.Source = val; 
         }
 
         public Uri DarkSource
