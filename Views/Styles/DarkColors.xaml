@@ -2,12 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Views.Styles">
 
-    <Color x:Key="Color_ButtonHoverBackground">#252329</Color> 
+    <Color x:Key="Color_ButtonHoverBackground">#535057</Color> 
     <SolidColorBrush x:Key="Brush_ItemBackground" Color="#252329"/>
     <SolidColorBrush x:Key="Brush_ItemForeground" Color="#FAFDF6"/>
 
     <SolidColorBrush x:Key="Brush_Item_Complete_Foreground" Color="#FAFDF6"/>
     <Color x:Key="Brush_Item_Complete_Background" >#0EAD69</Color>
+    <Color x:Key="Color_Item_Background">#252329</Color>
 
     <SolidColorBrush x:Key="Brush_ButtonForeground" Color="#FAFDF6"/>
     <SolidColorBrush x:Key="Brush_ButtonBackground" Color="#252329"/>
