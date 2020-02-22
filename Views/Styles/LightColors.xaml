@@ -3,20 +3,20 @@
                     >
 
     <Color x:Key="Color_ButtonHoverBackground">HotPink</Color> 
-    <SolidColorBrush x:Key="Brush_ItemBackground" Color="HotPink"/>
-    <SolidColorBrush x:Key="Brush_ItemForeground" Color="HotPink"/>
+    <SolidColorBrush x:Key="Brush_ItemBackground" Color="#CBF3F0"/>
+    <SolidColorBrush x:Key="Brush_ItemForeground" Color="#114843"/>
 
-    <SolidColorBrush x:Key="Brush_Item_Complete_Foreground" Color="HotPink"/>
-    <Color x:Key="Brush_Item_Complete_Background" >HotPink</Color>
+    <SolidColorBrush x:Key="Brush_Item_Complete_Foreground" Color="#FFFFFF"/>
+    <Color x:Key="Brush_Item_Complete_Background" >#2EC4B6</Color>
 
-    <SolidColorBrush x:Key="Brush_ButtonForeground" Color="HotPink"/>
-    <SolidColorBrush x:Key="Brush_ButtonBackground" Color="HotPink"/>
-    <SolidColorBrush x:Key="Brush_ButtonHoverBackgournd" Color="HotPink"/>
+    <SolidColorBrush x:Key="Brush_ButtonForeground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="Brush_ButtonBackground" Color="#FFBF69"/>
+    <SolidColorBrush x:Key="Brush_ButtonHoverBackgournd" Color="#FF9F1C"/>
     <SolidColorBrush x:Key="Brush_ButtonClickBackground" Color="HotPink"/>
 
     <SolidColorBrush x:Key="Brush_TextboxForeground_Light" Color="HotPink"/>
-    <SolidColorBrush x:Key="Brush_TextboxForeground" Color="HotPink"/>
-    <SolidColorBrush x:Key="Brush_TextboxBackground" Color="HotPink"/>
+    <SolidColorBrush x:Key="Brush_TextboxForeground" Color="#000000"/>
+    <SolidColorBrush x:Key="Brush_TextboxBackground" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="Brush_TextboxHintForeground" Color="HotPink"/>
 
     <SolidColorBrush x:Key="Brush_TextblockBackground" Color="Transparent"/>
