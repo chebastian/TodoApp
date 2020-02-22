@@ -68,9 +68,9 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Style="{DynamicResource TextStyle}" Text="{Binding Name}"/>
+                        <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
                         <StackPanel Grid.Column="2" Orientation="Horizontal" x:Name="chkComplete" Visibility="Collapsed">
-                            <Button Style="{DynamicResource BasicButton}" Content="Remove" CommandParameter="{Binding}">
+                            <Button Style="{StaticResource BasicButton}" Content="Remove" CommandParameter="{Binding}">
                                 <Behaviors:Interaction.Triggers>
                                     <Behaviors:EventTrigger EventName="Click">
                                         <Behaviors:GoToStateAction StateName="Removed"/>
@@ -169,8 +169,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button Style="{DynamicResource BasicButton}" Content="Save" Command="{Binding SaveCommand}"/>
-            <Button Style="{DynamicResource BasicButton}" Grid.Column="1" Content="Load" Command="{Binding LoadCommand}"/>
+            <Button Style="{StaticResource BasicButton}" Content="Save" Command="{Binding SaveCommand}"/>
+            <Button Style="{StaticResource BasicButton}" Grid.Column="1" Content="Load" Command="{Binding LoadCommand}"/>
 
         </Grid>
     </Grid>
