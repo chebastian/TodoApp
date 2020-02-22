@@ -16,6 +16,13 @@ namespace TodoList
         private Uri darkSource;
         private Uri lightSource;
 
+        public void ReloadTheme()
+        {
+            UpdateTheme();
+            LightSource =new Uri( "/Views;component/Styles/LightColors.xaml",UriKind.Relative);
+            DarkSource = new Uri("/Views;component/Styles/DarkColors.xaml", UriKind.Relative);
+        }
+
  
         public void UpdateTheme()
         {
