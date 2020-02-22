@@ -116,9 +116,9 @@
                                             FillBehavior="HoldEnd"
                                             Duration="0:0:0.3"/>
                                         <DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/>
-                                        <ThicknessAnimation Duration="{DynamicResource AnimationSpeed}" From="0,0,0,0" To="12" Storyboard.TargetProperty="Margin"/>
+                                        <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="12" Storyboard.TargetProperty="Margin"/>
                                         <ParallelTimeline BeginTime="0:0:0.1">
-                                            <ThicknessAnimation Duration="{DynamicResource AnimationSpeed}" From="12" To="0" Storyboard.TargetProperty="Margin"/>
+                                            <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="12" To="0" Storyboard.TargetProperty="Margin"/>
                                         </ParallelTimeline>
                                     </Storyboard>
                                 </VisualState> 
@@ -126,8 +126,8 @@
                             <VisualStateGroup>
                                 <VisualState x:Name="NotCompleted">
                                     <Storyboard >
-                                        <DoubleAnimation Duration="{DynamicResource AddSpeed}" From="0.0" To="1.0" Storyboard.TargetProperty="Opacity"/>
-                                        <ThicknessAnimation Duration="{DynamicResource AddSpeed}" From="0,-12,0,0" To="0,1,0,0" Storyboard.TargetProperty="Margin"/>
+                                        <DoubleAnimation Duration="{StaticResource AddSpeed}" From="0.0" To="1.0" Storyboard.TargetProperty="Opacity"/>
+                                        <ThicknessAnimation Duration="{StaticResource AddSpeed}" From="0,-12,0,0" To="0,1,0,0" Storyboard.TargetProperty="Margin"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Removed">
