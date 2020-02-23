@@ -34,6 +34,8 @@ namespace TodoList
             else
                 App.CurrentTheme = Themes.Dark;
 
+            App.CurrentLanguage = Lang.Eng;
+
             Resources.Clear();
             Resources.MergedDictionaries.Clear();
 

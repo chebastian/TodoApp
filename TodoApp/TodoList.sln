@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "..\ViewModels
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModelTest", "..\ViewModelTest\ViewModelTest.csproj", "{272A48E1-040F-424F-8881-0FB840156A13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoConsoleApp", "..\TodoConsoleApp\TodoConsoleApp.csproj", "{915D92B0-EA4B-4348-9BB1-E2AF4882B2E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoConsoleApp", "..\TodoConsoleApp\TodoConsoleApp.csproj", "{915D92B0-EA4B-4348-9BB1-E2AF4882B2E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization", "..\Localization\Localization.csproj", "{0F5C9524-4A4F-4145-A99B-0AC9826FB5E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{915D92B0-EA4B-4348-9BB1-E2AF4882B2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{915D92B0-EA4B-4348-9BB1-E2AF4882B2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{915D92B0-EA4B-4348-9BB1-E2AF4882B2E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F5C9524-4A4F-4145-A99B-0AC9826FB5E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F5C9524-4A4F-4145-A99B-0AC9826FB5E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F5C9524-4A4F-4145-A99B-0AC9826FB5E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F5C9524-4A4F-4145-A99B-0AC9826FB5E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
