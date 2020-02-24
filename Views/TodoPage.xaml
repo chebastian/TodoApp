@@ -44,7 +44,7 @@
                     </Behaviors:KeyTrigger>
                 </Behaviors:Interaction.Triggers>
             </TextBox>
-            <Button Style="{DynamicResource BasicButton}" Padding="24" Grid.Column="1" Content="Add" Command="{Binding AddCommand}" Click="FocusOnText"/>
+            <Button Style="{DynamicResource BasicButton}" Padding="24" Grid.Column="1" Content="{x:Static res:Strings.Btn_Add}" Command="{Binding AddCommand}" Click="FocusOnText"/>
         </Grid>
 
         <ItemsControl Grid.Row="1" ItemsSource="{Binding Items}" ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -71,7 +71,7 @@
 
                         <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
                         <StackPanel Grid.Column="2" Orientation="Horizontal" x:Name="chkComplete" Visibility="Collapsed">
-                            <Button Style="{StaticResource BasicButton}" Content="Remove" CommandParameter="{Binding}">
+                            <Button Style="{StaticResource BasicButton}" Content="{x:Static res:Strings.Btn_Delete}" CommandParameter="{Binding}">
                                 <Behaviors:Interaction.Triggers>
                                     <Behaviors:EventTrigger EventName="Click">
                                         <Behaviors:GoToStateAction StateName="Removed"/>
@@ -171,7 +171,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Style="{StaticResource BasicButton}" Content="{x:Static res:Strings.Btn_Save}" Command="{Binding SaveCommand}"/>
-            <Button Style="{StaticResource BasicButton}" Grid.Column="1" Content="Load" Command="{Binding LoadCommand}"/>
+            <Button Style="{StaticResource BasicButton}" Grid.Column="1" Content="{x:Static res:Strings.Btn_Load}" Command="{Binding LoadCommand}"/>
 
         </Grid>
     </Grid>
