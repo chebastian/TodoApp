@@ -12,7 +12,6 @@ namespace ViewModels
 {
     public class TodoItemViewModel : ViewModelBase
     {
-        private bool completed;
         private TodoItem item;
 
         public TodoItemViewModel(TodoItem item)
