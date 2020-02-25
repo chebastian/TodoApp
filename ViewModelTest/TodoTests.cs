@@ -14,7 +14,7 @@ namespace ViewModelTest
             var todo = new TodoList();
             todo.Add("a reminder");
 
-            Assert.Equal(todo.Items.Count, 1); 
+            Assert.Single(todo.Items); 
         }
 
 
@@ -23,11 +23,11 @@ namespace ViewModelTest
         {
             var todo = new TodoList();
             todo.Add("a reminder");
-            Assert.Equal(todo.Items.Count, 1);
+            Assert.Single(todo.Items);
 
             //Add another item
             todo.Add("My second item");
-            Assert.Equal(todo.Items.Count, 2);
+            Assert.Equal(2, todo.Items.Count);
         }
 
         [Fact]
@@ -36,13 +36,13 @@ namespace ViewModelTest
             var todo = new TodoList();
             var reminder = todo.Add("a reminder");
 
-            Assert.Equal(todo.Items.Count, 1);
+            Assert.Single(todo.Items);
 
             //The user can finish an item
             todo.Complete(reminder);
 
             var completedItems = todo.Items.Where(x => x.Completed).ToList();
-            Assert.Equal(completedItems.Count, 1); 
+            Assert.Single(completedItems);
 
         }
 
@@ -52,12 +52,12 @@ namespace ViewModelTest
             var todo = new TodoList();
             var item = todo.Add("a reminder");
 
-            Assert.Equal(todo.Items.Count, 1);
+            Assert.Single(todo.Items);
 
             //The user can finish an item
             todo.Remove(item);
 
-            Assert.Equal(todo.Items.Count, 0); 
+            Assert.Empty(todo.Items);
         }
     }
 
