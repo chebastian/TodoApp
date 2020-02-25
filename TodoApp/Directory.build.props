@@ -3,5 +3,12 @@
    <Deterministic>true</Deterministic>
    <Company>Bilds</Company>
    <Version>1.2.3</Version>
+   <Authors>Sebastian Ferngren</Authors>
  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
 </Project>
