@@ -10,20 +10,12 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.Resources>
-            <Style x:Key="TextStyle" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="Background" Value="{DynamicResource Brush_TextblockBackground}"/>
-                <Setter Property="Foreground" Value="{DynamicResource Brush_ItemForeground}"/>
-                <Setter Property="Padding" Value="4"/>
-            </Style>
             <Style TargetType="TextBox">
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Padding" Value="12"/>
                 <Setter Property="Foreground" Value="{DynamicResource Brush_TextboxForeground}"/>
                 <Setter Property="Background" Value="{DynamicResource Brush_TextboxBackground}"/>
             </Style>
-            <Duration x:Key="AnimationSpeed">0:0:0.1</Duration>
-            <Duration x:Key="AddSpeed">0:0:0.1</Duration>
         </Grid.Resources>
 
         <Grid.RowDefinitions>
@@ -59,107 +51,7 @@
             </ItemsControl.Template>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="item" Background="{DynamicResource Brush_ItemBackground}"  Margin="0,1,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="36" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
-                        <StackPanel Grid.Column="2" Orientation="Horizontal" x:Name="chkComplete" Visibility="Collapsed">
-                            <Button Style="{StaticResource BasicButton}" Content="{x:Static res:Strings.Btn_Delete}" CommandParameter="{Binding}">
-                                <Behaviors:Interaction.Triggers>
-                                    <Behaviors:EventTrigger EventName="Click">
-                                        <Behaviors:GoToStateAction StateName="Removed"/>
-                                        <Behaviors:InvokeCommandAction CommandParameter="{Binding}" Command="{Binding Path=DataContext.PreRemoveCommand, RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}}}" />
-                                    </Behaviors:EventTrigger>
-                                </Behaviors:Interaction.Triggers>
-                            </Button>
-                            <StackPanel.RenderTransform>
-                                <TranslateTransform/>
-                            </StackPanel.RenderTransform>
-                        </StackPanel>
-
-                        <Behaviors:Interaction.Triggers>
-                            <Behaviors:EventTrigger EventName="MouseEnter" SourceName="item">
-                                <Behaviors:GoToStateAction StateName="SlideIn"/>
-                                <Behaviors:ChangePropertyAction TargetName="chkComplete" PropertyName="Visibility" Value="Visible"/>
-                            </Behaviors:EventTrigger>
-                            <Behaviors:EventTrigger EventName="MouseLeave" SourceName="item">
-                                <Behaviors:GoToStateAction StateName="SlideOut"/>
-                            </Behaviors:EventTrigger>
-                            <Behaviors:EventTrigger EventName="MouseUp" SourceName="item">
-                                <Behaviors:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}},Path=DataContext.CompleteItemCommand}" CommandParameter="{Binding}"/>
-                            </Behaviors:EventTrigger>
-                            <Behaviors:DataTrigger Binding="{Binding Completed}" Value="True">
-                                <Behaviors:GoToStateAction StateName="Completed" />
-                            </Behaviors:DataTrigger>
-                            <Behaviors:DataTrigger Binding="{Binding Completed}" Value="False">
-                                <Behaviors:GoToStateAction StateName="NotCompleted" />
-                            </Behaviors:DataTrigger>
-                            <Behaviors:EventTrigger EventName="AnimationComplete">
-                                <Behaviors:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}},Path=DataContext.RemoveCommand}" CommandParameter="{Binding}"/>
-                            </Behaviors:EventTrigger>
-                        </Behaviors:Interaction.Triggers>
-
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="Complete">
-                                <VisualState x:Name="Completed">
-                                    <Storyboard >
-                                        <ColorAnimation 
-                                            Storyboard.TargetName="item"
-                                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
-                                            To="{DynamicResource Brush_Item_Complete_Background}" 
-                                            FillBehavior="HoldEnd"
-                                            Duration="0:0:0.3"/>
-                                        <DoubleAnimation Duration="0:0:0.2" From="0.1" To="1.0" Storyboard.TargetProperty="Opacity"/>
-                                        <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="0,0,0,0" To="12" Storyboard.TargetProperty="Margin"/>
-                                        <ParallelTimeline BeginTime="0:0:0.1">
-                                            <ThicknessAnimation Duration="{StaticResource AnimationSpeed}" From="12" To="0" Storyboard.TargetProperty="Margin"/>
-                                        </ParallelTimeline>
-                                    </Storyboard>
-                                </VisualState> 
-                            </VisualStateGroup>
-                            <VisualStateGroup>
-                                <VisualState x:Name="NotCompleted">
-                                    <Storyboard >
-                                        <DoubleAnimation Duration="{StaticResource AddSpeed}" From="0.0" To="1.0" Storyboard.TargetProperty="Opacity"/>
-                                        <ThicknessAnimation Duration="{StaticResource AddSpeed}" From="0,-12,0,0" To="0,1,0,0" Storyboard.TargetProperty="Margin"/>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Removed">
-                                    <Storyboard Completed="RemoveCompleted">
-                                        <ThicknessAnimation  Duration="0:0:0.3" From="0" To="1000,0,0,0" Storyboard.TargetProperty="Margin" />
-                                        <DoubleAnimation From="60" Duration="0:0:0.3" To="0.0" Storyboard.TargetProperty="Height" />
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="SlideIn">
-                                    <Storyboard>
-                                            <DoubleAnimation 
-                                                Storyboard.TargetName="chkComplete"
-                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                                From="100" 
-                                                To="0"
-                                                Duration="0:0:0.2"/>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="SlideOut">
-                                    <Storyboard>
-                                            <DoubleAnimation 
-                                                Storyboard.TargetName="chkComplete"
-                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                                From="0" 
-                                                To="100"
-                                                Duration="0:0:0.2"/>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </Grid>
+                    <local:TodoItemView RemovedCommand="{Binding ElementName=root, Path=DataContext.RemoveCommand}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

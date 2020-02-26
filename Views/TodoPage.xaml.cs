@@ -33,12 +33,6 @@ namespace Views
         private void FocusOnText(object sender, RoutedEventArgs e)
         {
             nameBox.Focus();
-        }
-
-        private void RemoveCompleted(object sender, EventArgs e)
-        {
-            var vm = (DataContext as TodoListViewModel);
-            vm.RemoveCommand.Execute(vm.ToRemove);
-        }
+        } 
     }
 }
