@@ -25,20 +25,7 @@
         </Grid.RowDefinitions>
 
 
-        <Grid x:Name="root" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBox x:Name="nameBox" Text="{Binding NextTodoName, UpdateSourceTrigger=PropertyChanged}" >
-                <Behaviors:Interaction.Triggers>
-                    <Behaviors:KeyTrigger Key="Return">
-                        <Behaviors:InvokeCommandAction Command="{Binding AddCommand}" CommandParameter="{Binding}"/>
-                    </Behaviors:KeyTrigger>
-                </Behaviors:Interaction.Triggers>
-            </TextBox>
-            <Button Style="{DynamicResource BasicButton}" Padding="24" Grid.Column="1" Content="{x:Static res:Strings.Btn_Add}" Command="{Binding AddCommand}" Click="FocusOnText"/>
-        </Grid>
+        <local:TodoItemAdderView x:Name="TodoAdder"/>
 
         <local:TodoListView Grid.Row="1"/>
 

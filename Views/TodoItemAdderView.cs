@@ -10,24 +10,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModels;
 
 namespace Views
 {
     /// <summary>
-    /// Interaction logic for TodoPage.xaml
+    /// Interaction logic for TodoITemAdder.xaml
     /// </summary>
-    public partial class TodoPage : UserControl
+    public partial class TodoItemAdderView : UserControl
     {
-        public TodoPage()
+        public TodoItemAdderView()
         {
             InitializeComponent();
-            Loaded += TodoPage_Loaded;
         }
 
-        private void TodoPage_Loaded(object sender, RoutedEventArgs e)
+        private void FocusOnText(object sender, RoutedEventArgs e)
         {
-            TodoAdder.nameBox.Focus();
-        } 
+            nameBox.Focus();
+        }
     }
 }
