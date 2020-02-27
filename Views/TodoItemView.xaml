@@ -36,7 +36,7 @@
                     <Behaviors:Interaction.Triggers>
                         <Behaviors:EventTrigger EventName="Click">
                             <Behaviors:GoToStateAction StateName="Removed"/>
-                            <Behaviors:InvokeCommandAction CommandParameter="{Binding}" Command="{Binding Path=DataContext.PreRemoveCommand, RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}}}" />
+                            <Behaviors:InvokeCommandAction CommandParameter="{Binding}" Command="{Binding Path=DataContext.PreRemoveCommand, RelativeSource={RelativeSource AncestorType={x:Type local:TodoListView}}}" />
                         </Behaviors:EventTrigger>
                     </Behaviors:Interaction.Triggers>
                 </Button>
@@ -54,7 +54,7 @@
                     <Behaviors:GoToStateAction StateName="SlideOut"/>
                 </Behaviors:EventTrigger>
                 <Behaviors:EventTrigger EventName="MouseUp" SourceName="item">
-                    <Behaviors:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}},Path=DataContext.CompleteItemCommand}" CommandParameter="{Binding}"/>
+                    <Behaviors:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TodoListView}},Path=DataContext.CompleteItemCommand}" CommandParameter="{Binding}"/>
                 </Behaviors:EventTrigger>
                 <Behaviors:DataTrigger Binding="{Binding Completed}" Value="True">
                     <Behaviors:GoToStateAction StateName="Completed" />
@@ -63,7 +63,7 @@
                     <Behaviors:GoToStateAction StateName="NotCompleted" />
                 </Behaviors:DataTrigger>
                 <Behaviors:EventTrigger EventName="AnimationComplete">
-                    <Behaviors:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}},Path=DataContext.RemoveCommand}" CommandParameter="{Binding}"/>
+                    <Behaviors:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TodoListView}},Path=DataContext.RemoveCommand}" CommandParameter="{Binding}"/>
                 </Behaviors:EventTrigger>
             </Behaviors:Interaction.Triggers>
 

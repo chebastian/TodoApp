@@ -24,7 +24,7 @@ namespace TodoList
         public MainWindow()
         {
             InitializeComponent();
-            TodoPage.DataContext = new TodoListViewModel();
+            TodoPage.DataContext = new TodoPageViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

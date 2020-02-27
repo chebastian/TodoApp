@@ -23,15 +23,5 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <!--<Border Background="{StaticResource Brush_ButtonBackground}" Width="200" />
-        <ItemsControl ItemsSource="{Binding TodoLists}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <TextBlock Text="{Binding Name}"/>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
     </Grid>
 </UserControl>

@@ -48,6 +48,31 @@ namespace ViewModels
             get => Item.Name;
         }
     }
+
+    public class TodoPageViewModel : ViewModelBase
+    {
+        private TodoListViewModel _listViewModel;
+
+        public TodoPageViewModel()
+        {
+            ListViewModel = new TodoListViewModel();
+        }
+
+        public TodoListViewModel ListViewModel
+        {
+            get
+            {
+                return _listViewModel;
+            }
+
+            set
+            {
+                _listViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public class TodoListViewModel : ViewModelBase
     {
         public interface ITodoItemSaver
