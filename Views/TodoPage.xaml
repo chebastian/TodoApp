@@ -24,6 +24,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+
         <Grid x:Name="root" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -39,22 +40,8 @@
             <Button Style="{DynamicResource BasicButton}" Padding="24" Grid.Column="1" Content="{x:Static res:Strings.Btn_Add}" Command="{Binding AddCommand}" Click="FocusOnText"/>
         </Grid>
 
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding Items}" ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ItemsControl.Template>
-                <ControlTemplate TargetType="ItemsControl">
-                    <Border>
-                        <ScrollViewer VerticalScrollBarVisibility="Auto">
-                            <ItemsPresenter /> 
-                        </ScrollViewer>
-                    </Border>
-                </ControlTemplate>
-            </ItemsControl.Template>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <local:TodoItemView RemovedCommand="{Binding ElementName=root, Path=DataContext.RemoveCommand}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <local:TodoListView Grid.Row="1"/>
+
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -66,5 +53,6 @@
             <Button Style="{StaticResource BasicButton}" Grid.Column="1" Content="{x:Static res:Strings.Btn_Load}" Command="{Binding LoadCommand}"/>
 
         </Grid>
+
     </Grid>
 </UserControl>
