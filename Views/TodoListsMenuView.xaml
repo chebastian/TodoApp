@@ -7,15 +7,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Border Background="{StaticResource Brush_ButtonBackground}" Width="200" />
-        <ItemsControl ItemsSource="{Binding Lists}">
-            <ItemsControl.ItemTemplate>
+        <Border Background="{StaticResource Brush_ButtonHoverBackgournd}" Width="200" />
+        <ListBox ItemsSource="{Binding Lists}" SelectedItem="{Binding SelectedList}">
+            <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
                     </Grid>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

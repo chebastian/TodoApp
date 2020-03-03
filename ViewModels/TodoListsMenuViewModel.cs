@@ -23,6 +23,30 @@ namespace ViewModels.TodoMenu
 
     public class TodoListsMenuViewModel : ViewModelBase
     {
+        public interface ITodoListSelector
+        {
+            void OnListSelected(string name);
+        }
+
+        public TodoListsMenuViewModel(ITodoListSelector selector)
+        {
+            _selector = selector;
+        }
+
+        private TodoListViewModel selectedList;
+        private ITodoListSelector _selector;
+
         public ObservableCollection<TodoListViewModel> Lists { get; set; }
+
+        public TodoListViewModel SelectedList
+        {
+            get => selectedList;
+            set
+            {
+                selectedList = value;
+                _selector.OnListSelected(value.Name);
+                OnPropertyChanged();
+            }
+        }
     }
 }

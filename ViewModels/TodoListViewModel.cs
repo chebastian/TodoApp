@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Todo;
+using ViewModels.TodoMenu;
 
 namespace ViewModels
 {
@@ -49,13 +50,21 @@ namespace ViewModels
         }
     }
 
-    public class TodoPageViewModel : ViewModelBase
+    public class TodoPageViewModel : ViewModelBase, TodoListsMenuViewModel.ITodoListSelector
     {
         private TodoListViewModel _listViewModel;
 
         public TodoPageViewModel()
         {
             ListViewModel = new TodoListViewModel();
+            MenuViewModel = new TodoListsMenuViewModel(this)
+            {
+                Lists = new ObservableCollection<TodoMenu.TodoListViewModel>()
+                {
+                    new TodoMenu.TodoListViewModel(){Name="saved.txt"},
+                    new TodoMenu.TodoListViewModel(){Name="another.txt"},
+                }
+            };
         }
 
         public TodoListViewModel ListViewModel
@@ -70,6 +79,13 @@ namespace ViewModels
                 _listViewModel = value;
                 OnPropertyChanged();
             }
+        }
+
+        public TodoListsMenuViewModel MenuViewModel { get; set; }
+
+        public void OnListSelected(string name)
+        {
+            ListViewModel.SwitchList(name);
         }
     }
 
@@ -96,6 +112,12 @@ namespace ViewModels
             LoadCommand = new RelayCommand(OnLoad);
             FileIsReady = true;
             LoadIsReady = true;
+        }
+
+        public void SwitchList(string name)
+        {
+            SerializeLocation = name;
+            LoadCommand.Execute(null);
         }
 
         private void OnPreRemove(object obj)

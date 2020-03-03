@@ -10,8 +10,9 @@
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Views;component/Styles/LightColors.xaml"/>
-                <ResourceDictionary Source="/Views;component/Styles/ButtonStyle.xaml"/>
                 <local:ThemeResourceDictionary LightSource="/Views;component/Styles/LightColors.xaml" DarkSource="/Views;component/Styles/DarkColors.xaml"/>
+                <ResourceDictionary Source="/Views;component/Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/Views;component/Styles/TextBlockStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>

@@ -41,9 +41,9 @@
 
         </Grid>
 
-        <!--<Grid Grid.RowSpan="3">
-            <local:TodoListsMenuView HorizontalAlignment="Left"/>
-        </Grid>-->
+        <Grid Grid.RowSpan="3">
+            <local:TodoListsMenuView DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TodoPage}}, Path=DataContext.MenuViewModel}" HorizontalAlignment="Left"/>
+        </Grid>
 
     </Grid>
 </UserControl>

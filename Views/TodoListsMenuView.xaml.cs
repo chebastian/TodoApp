@@ -12,7 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Views
-{
+{ 
     /// <summary>
     /// Interaction logic for TodoListsMenuView.xaml
     /// </summary>
