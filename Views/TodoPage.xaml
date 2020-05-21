@@ -18,13 +18,18 @@
             </Style>
         </Grid.Resources>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Grid.Column="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-
         <local:TodoItemAdderView x:Name="TodoAdder"/>
 
         <local:TodoListView Grid.Row="1"/>
@@ -39,6 +44,7 @@
             <Button Style="{StaticResource BasicButton}" Content="{x:Static res:Strings.Btn_Save}" Command="{Binding SaveCommand}"/>
             <Button Style="{StaticResource BasicButton}" Grid.Column="1" Content="{x:Static res:Strings.Btn_Load}" Command="{Binding LoadCommand}"/>
 
+        </Grid>
         </Grid>
 
         <Grid Grid.RowSpan="3">

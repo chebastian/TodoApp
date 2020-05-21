@@ -22,5 +22,25 @@ namespace Views
         {
             InitializeComponent();
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PopupMenu.IsOpen = false;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PopupMenu.IsOpen = !PopupMenu.IsOpen;
+        }
+
+        private void ListBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PopupMenu.IsOpen = false;
+        }
+
+        private void PopupMenu_MouseLeave(object sender, MouseEventArgs e)
+        {
+            PopupMenu.IsOpen = false;
+        }
     }
 }

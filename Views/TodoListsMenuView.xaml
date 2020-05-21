@@ -4,18 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Views"
+             xmlns:converters="clr-namespace:Views.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Border Background="{StaticResource Brush_ButtonHoverBackgournd}" Width="200" />
-        <ListBox ItemsSource="{Binding Lists}" SelectedItem="{Binding SelectedList}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+    <Grid Background="{StaticResource Brush_ButtonForeground}">
+        <Popup MouseLeave="PopupMenu_MouseLeave" x:Name="PopupMenu" IsOpen="{Binding ElementName=buttonRoot,Path=IsChecked}" Placement="Right">
+            <ListBox SelectionChanged="ListBox_SelectionChanged" Visibility="{Binding ElementName=buttonRoot,Path=IsChecked, Converter={converters:CollapsedWhenFalse}}" ItemsSource="{Binding Lists}" SelectedItem="{Binding SelectedList}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox> 
+        </Popup>
+        <ToggleButton 
+                      Background="{StaticResource Brush_ButtonBackground}"
+                      HorizontalAlignment="Left" 
+                      Content="..."
+                      VerticalAlignment="Top" Height="40" x:Name="buttonRoot" Width="40">
+        </ToggleButton>
     </Grid>
 </UserControl>
