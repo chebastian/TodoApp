@@ -20,7 +20,7 @@
             </ListBox> 
         </Popup>
         <ToggleButton 
-                      Background="{StaticResource Brush_ButtonBackground}"
+                      Style="{StaticResource BasicToggleButton}"
                       HorizontalAlignment="Left" 
                       Content="..."
                       VerticalAlignment="Top" Height="40" x:Name="buttonRoot" Width="40">

@@ -44,4 +44,45 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style TargetType="ToggleButton" x:Key="BasicToggleButton">
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Background" Value="{DynamicResource Brush_ButtonBackground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="RootBorder" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" TextBlock.Foreground="{DynamicResource Brush_ButtonForeground}" >
+                        <Border.Resources>
+                            <Duration x:Key="AnimationSpeed">0:0:0.1</Duration>
+                        </Border.Resources>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                        From="Orange" To="White" Duration="0:0:0.3"/>
+                                    </Storyboard> 
+                                </VisualState>
+                                <VisualState x:Name="MouseOver" >
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                            From="{TemplateBinding Background}" 
+                                            To="{DynamicResource Color_ButtonHoverBackground}" 
+                                            Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
