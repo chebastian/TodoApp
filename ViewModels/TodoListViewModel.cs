@@ -35,6 +35,7 @@ namespace ViewModels
             LoadIsReady = true;
         }
 
+
         public void SwitchList(string name)
         {
             SerializeLocation = name;
@@ -112,7 +113,15 @@ namespace ViewModels
 
         private void OnAdd(object obj)
         {
-            if (NextTodoName.StartsWith(":") && NextTodoName.Length > 1)
+            if (NextTodoName.StartsWith(":n") && NextTodoName.Length > 1)
+            {
+                CreateNewList(string.Join("", NextTodoName.Skip(2)));
+            }
+            else if (NextTodoName.StartsWith(":w") && NextTodoName.Length > 1)
+            {
+                OnSave(null);
+            }
+            else if (NextTodoName.StartsWith(":") && NextTodoName.Length > 1)
             {
                 SwitchList(string.Join("",NextTodoName.Skip(1)));
             }
@@ -127,6 +136,14 @@ namespace ViewModels
 
             OnPropertyChanged(nameof(Items));
             NextTodoName = "";
+        }
+
+        private void CreateNewList(string v)
+        {
+            Todo.Items.Clear();
+            Items.Clear();
+            SerializeLocation = v.Trim();
+            OnSave(null);
         }
     }
 }
