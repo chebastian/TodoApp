@@ -58,7 +58,7 @@ namespace ViewModels
         private async void OnLoad(object obj)
         {
             LoadIsReady = false;
-            while(!FileIsReady)
+            while (!FileIsReady)
             {
                 await Task.Delay(20);
             }
@@ -112,10 +112,18 @@ namespace ViewModels
 
         private void OnAdd(object obj)
         {
-            var added = Todo.Add(NextTodoName);
+            if (NextTodoName.StartsWith(":") && NextTodoName.Length > 1)
+            {
+                SwitchList(string.Join("",NextTodoName.Skip(1)));
+            }
+            else
+            {
+                var added = Todo.Add(NextTodoName);
 
-            var newItem = new TodoItemViewModel(added);
-            Items.Add(newItem);
+                var newItem = new TodoItemViewModel(added);
+                Items.Add(newItem);
+
+            }
 
             OnPropertyChanged(nameof(Items));
             NextTodoName = "";
