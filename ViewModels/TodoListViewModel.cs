@@ -10,7 +10,6 @@ using Todo;
 
 namespace ViewModels
 {
-
     public class TodoListViewModel : ViewModelBase
     {
         public interface ITodoItemSaver
