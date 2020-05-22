@@ -13,10 +13,10 @@ namespace ViewModels
             ListViewModel = new TodoListViewModel();
             MenuViewModel = new TodoListsMenuViewModel(this)
             {
-                Lists = new ObservableCollection<TodoMenu.TodoListViewModel>()
+                Lists = new ObservableCollection<TodoMenu.ItemViewModel>()
                 {
-                    new TodoMenu.TodoListViewModel(){Name="saved.txt"},
-                    new TodoMenu.TodoListViewModel(){Name="another.txt"},
+                    new TodoMenu.ItemViewModel(){Name="saved.txt"},
+                    new TodoMenu.ItemViewModel(){Name="another.txt"},
                 }
             };
         }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ViewModels.TodoMenu
 {
-    public class TodoListViewModel : ViewModelBase
+    public class ItemViewModel : ViewModelBase
     {
         private string name;
 
@@ -33,12 +33,12 @@ namespace ViewModels.TodoMenu
             _selector = selector;
         }
 
-        private TodoListViewModel selectedList;
+        private ItemViewModel selectedList;
         private ITodoListSelector _selector;
 
-        public ObservableCollection<TodoListViewModel> Lists { get; set; }
+        public ObservableCollection<ItemViewModel> Lists { get; set; }
 
-        public TodoListViewModel SelectedList
+        public ItemViewModel SelectedList
         {
             get => selectedList;
             set
