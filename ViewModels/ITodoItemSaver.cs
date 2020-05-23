@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Todo;
 
-namespace ViewModels
+namespace Todo.Persistance
 {
     public interface ITodoItemSaver
     {

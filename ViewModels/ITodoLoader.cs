@@ -1,4 +1,4 @@
-﻿namespace ViewModels
+﻿namespace Todo.Persistance
 {
     using System.Collections.Generic;
     using Todo;
