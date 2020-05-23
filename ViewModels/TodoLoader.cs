@@ -30,7 +30,7 @@ namespace ViewModels
         }
     }
 
-    public class TodoItemSaver : TodoListViewModel.ITodoItemSaver
+    public class TodoItemSaver : ITodoItemSaver
     {
         private string _path;
 

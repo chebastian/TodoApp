@@ -10,12 +10,13 @@ using Todo;
 
 namespace ViewModels
 {
+    public interface ITodoItemSaver
+    {
+        Task<bool> Save(List<TodoItem> items);
+    }
+
     public class TodoListViewModel : ViewModelBase
     {
-        public interface ITodoItemSaver
-        {
-            Task<bool> Save(List<TodoItem> items);
-        }
 
         private string nextTodoName;
 
@@ -123,7 +124,7 @@ namespace ViewModels
             }
             else if (NextTodoName.StartsWith(":") && NextTodoName.Length > 1)
             {
-                SwitchList(string.Join("",NextTodoName.Skip(1)));
+                SwitchList(string.Join("", NextTodoName.Skip(1)));
             }
             else
             {
