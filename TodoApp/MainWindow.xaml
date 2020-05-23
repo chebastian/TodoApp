@@ -7,8 +7,12 @@
         xmlns:views="clr-namespace:Views;assembly=Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <views:TodoPage x:Name="TodoPage"/>
-        <Button Content="Switch" Click="Button_Click"/>
-    </StackPanel>
+        <Button Grid.Row="1" Content="Switch" Click="Button_Click"/>
+    </Grid>
 </Window>
