@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace ViewModels
+namespace Todo.Persistance.Impl
 {
     using System.IO;
     using System.Collections.Generic;
