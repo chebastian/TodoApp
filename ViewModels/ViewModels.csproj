@@ -8,4 +8,9 @@
     <PackageReference Include="Sefe.Utils.MVVM" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TodoItemPersistanceInterface\TodoItemPersistanceInterface.csproj" />
+    <ProjectReference Include="..\TodoModels\TodoModels.csproj" />
+  </ItemGroup>
+
 </Project>
