@@ -1,6 +1,5 @@
 ﻿using Sefe.Utils.MVVM;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
@@ -10,10 +9,6 @@ using Todo;
 
 namespace ViewModels
 {
-    public interface ITodoItemSaver
-    {
-        Task<bool> Save(List<TodoItem> items);
-    }
 
     public class TodoListViewModel : ViewModelBase
     {

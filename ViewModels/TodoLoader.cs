@@ -8,11 +8,6 @@ namespace ViewModels
     using System.Threading.Tasks;
     using Todo;
 
-    public interface ITodoLoader
-    {
-        IAsyncEnumerable<TodoItem> Items();
-    }
-
     public class TodoItemSerializer
     {
         public static string AsSeralizedString(TodoItem item)
