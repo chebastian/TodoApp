@@ -78,7 +78,6 @@ namespace TodoConsoleApp
 
         private void AddTodo(string todo, string file)
         {
-            var writer = new TodoItemSerializer();
             _vm.LoadCommand.Execute(null);
             _vm.NextTodoName = todo;
             _vm.AddCommand.Execute(null);
