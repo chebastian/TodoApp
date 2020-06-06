@@ -1,28 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Todo;
 
-namespace Todo.Interfaces
+namespace Todo.Service.Interface.Impl
 {
-    public interface ITodoService
-    {
-        Task<List<TodoItem>> ListTodos();
-        Task<TodoItem> Add(TodoItem item);
-        Task<TodoItem> Complete(TodoItem item);
-        Task<bool> Remove(TodoItem item);
-
-        Task<List<TodoItem>> Load(string fileName);
-        Task<bool> Save(string fileName);
-    }
-
     public class InMemoryTodoService : ITodoService
     {
         public InMemoryTodoService(string name)
         {
             Name = name;
             _list = new TodoList();
-            _list.Items = new List<TodoItem>() { new TodoItem(name + 1), new TodoItem(name + 2), new TodoItem(name + 3)   };
+            _list.Items = new List<TodoItem>() { new TodoItem(name + 1), new TodoItem(name + 2), new TodoItem(name + 3) };
         }
 
         public string Name { get; }
@@ -31,7 +19,7 @@ namespace Todo.Interfaces
 
         public Task<TodoItem> Add(TodoItem item)
         {
-            return Task.FromResult(_list.Add(item.Name) );
+            return Task.FromResult(_list.Add(item.Name));
         }
 
         public Task<TodoItem> Complete(TodoItem item)
@@ -44,7 +32,7 @@ namespace Todo.Interfaces
             return Task.FromResult(_list.Items);
         }
 
-        public  Task<bool> Remove(TodoItem item)
+        public Task<bool> Remove(TodoItem item)
         {
             var wasRemoved = _list.Items.Contains(item);
             _list.Remove(item);
@@ -53,7 +41,7 @@ namespace Todo.Interfaces
 
         public Task<List<TodoItem>> Load(string name)
         {
-            _list.Items = new List<TodoItem>() { new TodoItem(name + 1), new TodoItem(name + 2), new TodoItem(name + 3)   };
+            _list.Items = new List<TodoItem>() { new TodoItem(name + 1), new TodoItem(name + 2), new TodoItem(name + 3) };
             return Task.FromResult(_list.Items);
         }
 
@@ -63,3 +51,4 @@ namespace Todo.Interfaces
         }
     }
 }
+

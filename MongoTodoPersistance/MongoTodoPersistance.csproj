@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TodoItemPersistanceInterface\TodoItemPersistanceInterface.csproj" />
+    <ProjectReference Include="..\TodoItemPersistanceInterface\TodoService.csproj" />
   </ItemGroup>
 
 </Project>
