@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Todo.Interfaces;
 using Todo.Persistance.Impl;
+using Todo.Service.Interface;
+using Todo.Service.Interface.Impl;
 using ViewModels;
 
 namespace TodoConsoleApp

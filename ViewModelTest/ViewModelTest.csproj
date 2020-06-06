@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MongoTodoPersistance\MongoTodoPersistance.csproj" />
-    <ProjectReference Include="..\TodoItemPersistanceInterface\TodoItemPersistanceInterface.csproj" />
+    <ProjectReference Include="..\TodoItemPersistanceInterface\TodoService.csproj" />
     <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
   </ItemGroup>
 

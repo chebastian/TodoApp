@@ -15,11 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoConsoleApp", "..\TodoCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Localization", "..\Localization\Localization.csproj", "{0F5C9524-4A4F-4145-A99B-0AC9826FB5E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoItemPersistanceInterface", "..\TodoItemPersistanceInterface\TodoItemPersistanceInterface.csproj", "{2E37554A-5606-4011-B043-D88D36820AA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoService", "..\TodoItemPersistanceInterface\TodoService.csproj", "{2E37554A-5606-4011-B043-D88D36820AA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoModels", "..\TodoModels\TodoModels.csproj", "{38837A96-58B2-40B7-BA93-364D52E7CE19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoModels", "..\TodoModels\TodoModels.csproj", "{38837A96-58B2-40B7-BA93-364D52E7CE19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoTodoPersistance", "..\MongoTodoPersistance\MongoTodoPersistance.csproj", "{4CFC30CD-548C-418B-A491-B3E283C6576E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoTodoPersistance", "..\MongoTodoPersistance\MongoTodoPersistance.csproj", "{4CFC30CD-548C-418B-A491-B3E283C6576E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
