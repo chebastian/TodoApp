@@ -7,7 +7,7 @@ using Todo.Persistance;
 
 namespace Todo.Service.Interface.Impl
 {
-    public class ComponentService : ITodoService
+    public class TodoService : ITodoService
     {
         private ITodoItemSaver Saver => _saverFactory(_name);
         private ITodoLoader Loader => _loaderFactory(_name);
@@ -16,7 +16,7 @@ namespace Todo.Service.Interface.Impl
         private Func<string, ITodoItemSaver> _saverFactory;
         private Func<string, ITodoLoader> _loaderFactory;
 
-        public ComponentService(string name,Func<string,ITodoItemSaver> saver, Func<string,ITodoLoader> loader)
+        public TodoService(string name,Func<string,ITodoItemSaver> saver, Func<string,ITodoLoader> loader)
         {
             _name = name;
             _saverFactory = saver;

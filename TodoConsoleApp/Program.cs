@@ -53,13 +53,13 @@ namespace TodoConsoleApp
             if (theCommand == Commands.List)
             {
                 var theList = v[1];
-                _todo = new ComponentService(theList,x => new TodoItemSaver(x), x => new TodoLoader(x));
+                _todo = new TodoService(theList,x => new TodoItemSaver(x), x => new TodoLoader(x));
                 await ListTodos(theList);
             }
             else
             {
                 var theList = v[2];
-                _todo = new ComponentService(theList,x => new TodoItemSaver(x), x => new TodoLoader(x));
+                _todo = new TodoService(theList,x => new TodoItemSaver(x), x => new TodoLoader(x));
                 var theItem = v[1];
                 await _todo.Load(theList);
                 if (theCommand == Commands.Add)

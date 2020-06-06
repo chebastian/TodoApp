@@ -12,7 +12,7 @@ namespace ViewModels
 
         public TodoPageViewModel()
         {
-            var todoService = new ComponentService("", x => new TodoItemSaver(x), x => new TodoLoader(x));
+            var todoService = new TodoService("", x => new TodoItemSaver(x), x => new TodoLoader(x));
             ListViewModel = new TodoListViewModel(todoService);
             MenuViewModel = new TodoListsMenuViewModel(this)
             {
