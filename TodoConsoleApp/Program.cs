@@ -52,21 +52,24 @@ namespace TodoConsoleApp
         {
             if (theCommand == Commands.List)
             {
-                ListTodos(v[1]);
+                var theList = v[1];
+                ListTodos(theList);
             }
             else
             {
+                var theItem = v[1];
+                var theList = v[2];
                 if (theCommand == Commands.Add)
                 {
-                    AddTodo(v[1], v[2]);
+                    AddTodo(theItem, theList);
                 }
                 else if (theCommand == Commands.Complete)
                 {
-                    CompleteItem(v[1], v[2]);
+                    CompleteItem(theItem);
                 }
 
-                _vm.SaveCommand.Execute(null);
-                ListTodos(v[0]);
+                _todo.Save(theList);
+                ListTodos(theList);
             }
 
         }
