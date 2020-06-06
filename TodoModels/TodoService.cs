@@ -22,6 +22,7 @@ namespace Todo.Interfaces
         {
             Name = name;
             _list = new TodoList();
+            _list.Items = new List<TodoItem>() { new TodoItem(name + 1), new TodoItem(name + 2), new TodoItem(name + 3)   };
         }
 
         public string Name { get; }
