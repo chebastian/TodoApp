@@ -1,5 +1,7 @@
 ﻿using Sefe.Utils.MVVM;
 using System.Collections.ObjectModel;
+using Todo.Persistance.Impl;
+using Todo.Service.Interface.Impl;
 using ViewModels.TodoMenu;
 
 namespace ViewModels
@@ -10,7 +12,8 @@ namespace ViewModels
 
         public TodoPageViewModel()
         {
-            ListViewModel = new TodoListViewModel();
+            var todoService = new ComponentService("", x => new TodoItemSaver(x), x => new TodoLoader(x));
+            ListViewModel = new TodoListViewModel(todoService);
             MenuViewModel = new TodoListsMenuViewModel(this)
             {
                 Lists = new ObservableCollection<TodoMenu.ItemViewModel>()

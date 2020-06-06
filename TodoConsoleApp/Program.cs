@@ -38,7 +38,6 @@ namespace TodoConsoleApp
 
     public class App
     {
-        private TodoListViewModel _vm;
         private IUiWriter _writer;
 
 
@@ -46,7 +45,6 @@ namespace TodoConsoleApp
 
         public App()
         {
-            _vm = new TodoListViewModel();
             _writer = new MyConsoleWriter();
         }
 
