@@ -49,7 +49,7 @@ namespace TodoConsoleApp
         {
             if (theCommand == Commands.List)
             {
-                ListTodos(v[0]);
+                ListTodos(v[1]);
             }
             else
             {
@@ -106,11 +106,13 @@ namespace TodoConsoleApp
         {
             var app = new App();
 
-            //var listofArgs = new[] { "filename", "-list", "file.txt" };
-            //var listofArgs = new[] { "filename", "-complete", "test", "file.txt" };
-            //var listofArgs = new[] { "filename", "-remove","theItem", "file.txt" };
-            //var listofArgs = new[] { "filename", "-complete", "one", "file.txt" };
-            var listofArgs = args;
+            //var listofArgs = args;
+            var testFile = "saved.txt";
+            //var listofArgs = new[] { "-list", testFile };
+            var listofArgs = new[] { "-add", "newItem", testFile };
+            //var listofArgs = new[] { "-complete", "test", testFile };
+            //var listofArgs = new[] { "-remove", "theItem", testFile };
+            //var listofArgs = new[] { "-complete", "one", testFile };
 
             Commands theCommand = ParseArgs(listofArgs);
 
