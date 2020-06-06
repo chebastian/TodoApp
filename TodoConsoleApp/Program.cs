@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Todo.Interfaces;
 using Todo.Persistance.Impl;
 using ViewModels;
 
@@ -38,60 +39,56 @@ namespace TodoConsoleApp
     {
         private TodoListViewModel _vm;
         private IUiWriter _writer;
+        private ITodoService _todo;
 
         public App()
         {
             _vm = new TodoListViewModel();
             _writer = new MyConsoleWriter();
+            _todo = new InMemoryTodoService("test");
         }
 
         internal void Execute(Commands theCommand, string[] v)
         {
             if (theCommand == Commands.List)
             {
-                ListTodos(v[1]);
+                var theList = v[1];
+                ListTodos(theList);
             }
             else
             {
+                var theItem = v[1];
+                var theList = v[2];
                 if (theCommand == Commands.Add)
                 {
-                    AddTodo(v[1], v[2]);
+                    AddTodo(theItem, theList);
                 }
                 else if (theCommand == Commands.Complete)
                 {
-                    CompleteItem(v[1], v[2]);
+                    CompleteItem(theItem);
                 }
 
-                _vm.SaveCommand.Execute(null);
-                ListTodos(v[0]);
+                _todo.Save(theList);
+                ListTodos(theList);
             }
 
         }
 
-        private void CompleteItem(string v1, string v2)
+        private void CompleteItem(string item)
         {
-            _vm.LoadCommand.Execute(null);
-
-            var theItem = _vm.Items.Where(x => x.Name == v1).FirstOrDefault();
-            _vm.CompleteItemCommand.Execute(theItem);
+            _todo.Complete(new Todo.TodoItem(item));
         }
 
-        private void AddTodo(string todo, string file)
+        private async void AddTodo(string todo, string file)
         {
-            _vm.LoadCommand.Execute(null);
-            _vm.NextTodoName = todo;
-            _vm.AddCommand.Execute(null);
-            _vm.SaveCommand.Execute(null);
+            await _todo.Load(file);
+            await _todo.Add(new Todo.TodoItem(todo));
         }
 
-        private void ListTodos(string v)
+        private async void ListTodos(string v)
         {
-            _vm.LoadCommand.Execute(null);
-            while (!_vm.LoadIsReady)
-            {
-            }
-
-            foreach (var item in _vm.Items)
+            var items = await _todo.ListTodos();
+            foreach (var item in items)
             {
                 var checkmark = item.Completed ? "[x]" : "[ ]";
                 _writer.PrintLn($"{checkmark}\t{item.Name}");
