@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Todo;
 using Todo.Persistance.Impl;
+using Todo.Service.Interface;
 
 namespace ViewModels
 {
@@ -16,13 +17,12 @@ namespace ViewModels
 
         private string nextTodoName;
 
-        public TodoListViewModel()
+        public TodoListViewModel(ITodoService todoService)
         {
             AddCommand = new RelayCommand(OnAdd);
             RemoveCommand = new RelayCommand(OnRemove);
             CompleteItemCommand = new RelayCommand(OnCompleteItem);
             PreRemoveCommand = new RelayCommand(OnPreRemove);
-            Todo = new Todo.TodoList();
             Items = new ObservableCollection<TodoItemViewModel>();
 
             SerializeLocation = "./saved.txt";
@@ -30,6 +30,7 @@ namespace ViewModels
             LoadCommand = new RelayCommand(OnLoad);
             FileIsReady = true;
             LoadIsReady = true;
+            Todo = todoService;
         }
 
 
@@ -46,36 +47,22 @@ namespace ViewModels
 
         private async void OnSave(object obj)
         {
-            FileIsReady = false;
-            var saver = new TodoItemSaver(SerializeLocation);
-            await saver.Save(Todo.Items);
-            FileIsReady = true;
-
+            await Todo.Save(SerializeLocation);
         }
 
         private async void OnLoad(object obj)
         {
-            LoadIsReady = false;
-            while (!FileIsReady)
-            {
-                await Task.Delay(20);
-            }
-
-            var loader = new TodoLoader(SerializeLocation);
-            Todo.Items.Clear();
+            await Todo.Load(SerializeLocation);
             Items.Clear();
-            await foreach (var item in loader.Items())
+            foreach (var item in await Todo.ListTodos())
             {
-                Todo.Items.Add(item);
                 Items.Add(new TodoItemViewModel(item));
             }
-
-            LoadIsReady = true;
         }
 
-        private void OnCompleteItem(object obj)
+        private async void OnCompleteItem(object obj)
         {
-            (obj as TodoItemViewModel).Item = Todo.Complete((obj as TodoItemViewModel).Item);
+            (obj as TodoItemViewModel).Item = await Todo.Complete((obj as TodoItemViewModel).Item);
         }
 
         public ObservableCollection<TodoItemViewModel> Items { get; set; }
@@ -86,7 +73,7 @@ namespace ViewModels
         public ICommand RemoveCommand { get; set; }
         public ICommand PreRemoveCommand { get; set; }
         public ICommand CompleteItemCommand { get; set; }
-        public TodoList Todo { get; }
+        public ITodoService Todo { get; }
 
         public string NextTodoName
         {
@@ -108,7 +95,7 @@ namespace ViewModels
             Items.Remove((obj as TodoItemViewModel));
         }
 
-        private void OnAdd(object obj)
+        private async void OnAdd(object obj)
         {
             if (NextTodoName.StartsWith(":n") && NextTodoName.Length > 1)
             {
@@ -124,7 +111,7 @@ namespace ViewModels
             }
             else
             {
-                var added = Todo.Add(NextTodoName);
+                var added = await Todo.Add(new TodoItem(NextTodoName));
 
                 var newItem = new TodoItemViewModel(added);
                 Items.Add(newItem);
@@ -137,7 +124,7 @@ namespace ViewModels
 
         private void CreateNewList(string v)
         {
-            Todo.Items.Clear();
+            Todo.Load(v);
             Items.Clear();
             SerializeLocation = v.Trim();
             OnSave(null);
