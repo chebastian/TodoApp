@@ -40,53 +40,56 @@ namespace TodoConsoleApp
     {
         private TodoListViewModel _vm;
         private IUiWriter _writer;
+
+
         private ITodoService _todo;
 
         public App()
         {
             _vm = new TodoListViewModel();
             _writer = new MyConsoleWriter();
-            _todo = new InMemoryTodoService("test");
         }
 
-        internal void Execute(Commands theCommand, string[] v)
+        internal async Task Execute(Commands theCommand, string[] v)
         {
             if (theCommand == Commands.List)
             {
                 var theList = v[1];
-                ListTodos(theList);
+                _todo = new ComponentService(theList,x => new TodoItemSaver(x), x => new TodoLoader(x));
+                await ListTodos(theList);
             }
             else
             {
-                var theItem = v[1];
                 var theList = v[2];
+                _todo = new ComponentService(theList,x => new TodoItemSaver(x), x => new TodoLoader(x));
+                var theItem = v[1];
+                await _todo.Load(theList);
                 if (theCommand == Commands.Add)
                 {
-                    AddTodo(theItem, theList);
+                    await AddTodo(theItem, theList);
                 }
                 else if (theCommand == Commands.Complete)
                 {
-                    CompleteItem(theItem);
+                    await CompleteItem(theItem,theList);
                 }
 
-                _todo.Save(theList);
-                ListTodos(theList);
+                await _todo.Save(theList);
+                await ListTodos(theList);
             }
 
         }
 
-        private void CompleteItem(string item)
+        private async Task CompleteItem(string item,string file)
         {
-            _todo.Complete(new Todo.TodoItem(item));
+            await _todo.Complete(new Todo.TodoItem(item));
         }
 
-        private async void AddTodo(string todo, string file)
+        private async Task AddTodo(string todo, string file)
         {
-            await _todo.Load(file);
             await _todo.Add(new Todo.TodoItem(todo));
         }
 
-        private async void ListTodos(string v)
+        private async Task ListTodos(string v)
         {
             var items = await _todo.ListTodos();
             foreach (var item in items)
@@ -100,7 +103,7 @@ namespace TodoConsoleApp
     class Program
     {
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var app = new App();
 
@@ -116,7 +119,7 @@ namespace TodoConsoleApp
 
             if (theCommand != Commands.Help)
             {
-                app.Execute(theCommand, listofArgs.ToArray());
+                await app.Execute(theCommand, listofArgs.ToArray());
             }
 
             Console.WriteLine("Help: <TODO>");
