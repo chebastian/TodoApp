@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Todo.Interfaces;
 using Todo.Persistance.Impl;
 using ViewModels;
 
@@ -38,11 +39,13 @@ namespace TodoConsoleApp
     {
         private TodoListViewModel _vm;
         private IUiWriter _writer;
+        private ITodoService _todo;
 
         public App()
         {
             _vm = new TodoListViewModel();
             _writer = new MyConsoleWriter();
+            _todo = new InMemoryTodoService("test");
         }
 
         internal void Execute(Commands theCommand, string[] v)
