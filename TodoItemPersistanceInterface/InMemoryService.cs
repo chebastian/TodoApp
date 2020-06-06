@@ -1,9 +1,79 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Todo;
+using Todo.Persistance;
 
 namespace Todo.Service.Interface.Impl
 {
+    public class ComponentService : ITodoService
+    {
+        private ITodoItemSaver Saver => _saverFactory(_name);
+        private ITodoLoader Loader => _loaderFactory(_name);
+        public TodoList _list;
+        private string _name;
+        private Func<string, ITodoItemSaver> _saverFactory;
+        private Func<string, ITodoLoader> _loaderFactory;
+
+        public ComponentService(string name,Func<string,ITodoItemSaver> saver, Func<string,ITodoLoader> loader)
+        {
+            _name = name;
+            _saverFactory = saver;
+            _loaderFactory = loader;
+            _list = new TodoList(); 
+        } 
+
+        public string Name { get; }
+
+        public Task<TodoItem> Add(TodoItem item)
+        {
+            return Task.FromResult(_list.Add(item.Name));
+        }
+
+        public Task<TodoItem> Complete(TodoItem item)
+        {
+            return Task.FromResult(_list.Complete(item));
+        }
+
+        public async Task<List<TodoItem>> ListTodos()
+        {
+            var res =  new List<TodoItem>();
+            await foreach(var item in Loader.Items())
+            {
+                res.Add(item);
+            }
+            return res;
+        }
+
+        public Task<bool> Remove(TodoItem item)
+        {
+            var wasRemoved = _list.Items.Contains(item);
+            _list.Remove(item);
+            return Task.FromResult(wasRemoved);
+        }
+
+        public async Task<List<TodoItem>> Load(string name)
+        {
+            _name = name;
+            _list.Items.Clear();
+            await foreach(var item in Loader.Items())
+            {
+                _list.Items.Add(item);
+            }
+
+
+            return _list.Items;
+        }
+
+        public async Task<bool> Save(string fileName)
+        {
+            _name = fileName;
+            var res = await Task.Run(() => Saver.Save(_list.Items));
+            return true;
+        }
+    }
+
     public class InMemoryTodoService : ITodoService
     {
         public InMemoryTodoService(string name)
