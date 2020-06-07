@@ -17,13 +17,51 @@
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox> 
+            </ListBox>
         </Popup>
-        <ToggleButton 
+
+        <StackPanel Orientation="Vertical">
+            <StackPanel.Resources>
+                <Style TargetType="Image" x:Key="ImageStyle">
+                    <Setter Property="Margin" Value="8"/>
+                    <Setter Property="MinWidth" Value="36"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <ToggleButton 
                       Style="{StaticResource BasicToggleButton}"
-                      HorizontalAlignment="Left" 
+                      HorizontalAlignment="Left"
                       Content="..."
                       VerticalAlignment="Top" Height="40" x:Name="buttonRoot" Width="40">
-        </ToggleButton>
+            </ToggleButton>
+
+            <ToggleButton 
+                      Style="{StaticResource BasicToggleButton}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top" Height="40" Width="40">
+                <Image Style="{StaticResource ImageStyle}" Source="/Views;component/resources/new.png"/>
+            </ToggleButton>
+
+            <ToggleButton 
+                      Style="{StaticResource BasicToggleButton}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top" Height="40" Width="40">
+                <Image Style="{StaticResource ImageStyle}" Source="/Views;component/resources/save.png"/>
+            </ToggleButton>
+            <ToggleButton 
+                      Style="{StaticResource BasicToggleButton}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top" Height="40" Width="40">
+                <Image Style="{StaticResource ImageStyle}" Source="/Views;component/resources/open.png"/>
+            </ToggleButton>
+
+            <ToggleButton 
+                      Style="{StaticResource BasicToggleButton}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top" Height="40" Width="40">
+                <Image Style="{StaticResource ImageStyle}" Source="/Views;component/resources/remove.png"/>
+            </ToggleButton>
+
+        </StackPanel>
     </Grid>
 </UserControl>
