@@ -6,12 +6,39 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resources\add.png" />
+    <None Remove="resources\baseline_add_black_18dp.png" />
+    <None Remove="resources\baseline_add_circle_black_18dp.png" />
+    <None Remove="resources\baseline_article_black_18dp.png" />
+    <None Remove="resources\baseline_delete_black_18dp.png" />
+    <None Remove="resources\baseline_delete_forever_black_18dp.png" />
+    <None Remove="resources\baseline_done_black_18dp.png" />
+    <None Remove="resources\baseline_playlist_add_black_18dp.png" />
+    <None Remove="resources\baseline_post_add_black_18dp.png" />
+    <None Remove="resources\baseline_remove_circle_black_18dp.png" />
+    <None Remove="resources\clear.png" />
+    <None Remove="resources\new.png" />
+    <None Remove="resources\open.png" />
+    <None Remove="resources\remove.png" />
+    <None Remove="resources\save.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Localization\Localization.csproj" />
     <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resources\add.png" />
+    <Resource Include="resources\clear.png" />
+    <Resource Include="resources\new.png" />
+    <Resource Include="resources\open.png" />
+    <Resource Include="resources\remove.png" />
+    <Resource Include="resources\save.png" />
   </ItemGroup>
 
   <ItemGroup>

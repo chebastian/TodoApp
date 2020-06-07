@@ -75,11 +75,21 @@ namespace ViewModels
         public ICommand CompleteItemCommand { get; set; }
         public ITodoService Todo { get; }
 
+        private string _commandImage;
+
+        public string CurrentCommandImage
+        {
+            get { return _commandImage; }
+            set { _commandImage = value; OnPropertyChanged(); }
+        }
+
         public string NextTodoName
         {
-            get => nextTodoName; set
+            get => nextTodoName;
+            set
             {
                 nextTodoName = value;
+                CurrentCommandImage = ToImagePath(ToCommand(value));
                 OnPropertyChanged();
             }
         }
@@ -95,27 +105,63 @@ namespace ViewModels
             Items.Remove((obj as TodoItemViewModel));
         }
 
+        public enum ListCommand
+        {
+            Add,
+            Remove,
+            Save,
+            Load,
+            New,
+            None
+        }
+
+        public ListCommand ToCommand(string next)
+        {
+
+            var command = next switch
+            {
+                string cmd when cmd.StartsWith(":w") => ListCommand.Save,
+                string cmd when cmd.StartsWith(":n") => ListCommand.New,
+                string cmd when cmd.StartsWith(":") => ListCommand.Load,
+                _ => ListCommand.Add
+            };
+
+            return next.Length >= 1 ? command : ListCommand.None;
+        }
+
+        public String ToImagePath(ListCommand command) => command switch
+        {
+            ListCommand.Add =>  "/Views;component/resources/add.png",
+            ListCommand.Load => "/Views;component/resources/open.png",
+            ListCommand.New =>  "/Views;component/resources/new.png",
+            ListCommand.Remove => "/Views;component/resources/remove.png",
+            ListCommand.Save => "/Views;component/resources/save.png",
+            _  => ""
+        };
+
+
+
         private async void OnAdd(object obj)
         {
-            if (NextTodoName.StartsWith(":n") && NextTodoName.Length > 1)
+            var command = ToCommand(nextTodoName);
+            if (command == ListCommand.New)
             {
                 CreateNewList(string.Join("", NextTodoName.Skip(2)));
             }
-            else if (NextTodoName.StartsWith(":w") && NextTodoName.Length > 1)
+            else if (command == ListCommand.Save)
             {
                 OnSave(null);
             }
-            else if (NextTodoName.StartsWith(":") && NextTodoName.Length > 1)
+            else if (command == ListCommand.Load)
             {
                 SwitchList(string.Join("", NextTodoName.Skip(1)));
             }
-            else
+            else if(command == ListCommand.Add)
             {
                 var added = await Todo.Add(new TodoItem(NextTodoName));
 
                 var newItem = new TodoItemViewModel(added);
                 Items.Add(newItem);
-
             }
 
             OnPropertyChanged(nameof(Items));
