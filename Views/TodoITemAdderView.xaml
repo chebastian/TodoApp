@@ -20,6 +20,7 @@
                 </Behaviors:KeyTrigger>
             </Behaviors:Interaction.Triggers>
         </TextBox>
-        <Button Style="{DynamicResource BasicButton}" Padding="24" Grid.Column="1" Content="{x:Static res:Strings.Btn_Add}" Command="{Binding AddCommand}" Click="FocusOnText"/>
+        <Image MinHeight="36" MinWidth="36" Margin="8" Grid.Column="1" Source="{Binding CurrentCommandImage}" />
     </Grid>
+
 </UserControl>
