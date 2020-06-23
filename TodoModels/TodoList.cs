@@ -28,7 +28,7 @@ namespace Todo
                 theItem.Completed = true;
             }
 
-            return theItem;
+            return new TodoItem(todo.Name) { Completed = true };
         }
 
         public void Remove(TodoItem item)

@@ -24,8 +24,6 @@ namespace Todo.Service.Interface.Impl
             _list = new TodoList(); 
         } 
 
-        public string Name { get; }
-
         public Task<TodoItem> Add(TodoItem item)
         {
             return Task.FromResult(_list.Add(item.Name));

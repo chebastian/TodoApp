@@ -13,9 +13,9 @@ namespace Todo
         public string Name { get; set; }
         public bool Completed { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            return obj is TodoItem item &&
+            return obj is TodoItem item && item != null &&
                    Name == item.Name &&
                    Completed == item.Completed;
         }

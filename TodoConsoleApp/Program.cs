@@ -42,33 +42,31 @@ namespace TodoConsoleApp
 
 
         private ITodoService _todo;
+        private string theList;
 
-        public App()
+        public App(string list)
         {
             _writer = new MyConsoleWriter();
+            theList = list;
+            _todo = new TodoService(theList, x => new TodoItemSaver(x), x => new TodoLoader(x));
         }
 
         internal async Task Execute(Commands theCommand, string[] v)
         {
             if (theCommand == Commands.List)
             {
-                var theList = v[1];
-                _todo = new TodoService(theList,x => new TodoItemSaver(x), x => new TodoLoader(x));
                 await ListTodos(theList);
             }
             else
             {
-                var theList = v[2];
-                _todo = new TodoService(theList,x => new TodoItemSaver(x), x => new TodoLoader(x));
                 var theItem = v[1];
-                await _todo.Load(theList);
                 if (theCommand == Commands.Add)
                 {
                     await AddTodo(theItem, theList);
                 }
                 else if (theCommand == Commands.Complete)
                 {
-                    await CompleteItem(theItem,theList);
+                    await CompleteItem(theItem, theList);
                 }
 
                 await _todo.Save(theList);
@@ -77,13 +75,15 @@ namespace TodoConsoleApp
 
         }
 
-        private async Task CompleteItem(string item,string file)
+        private async Task CompleteItem(string item, string file)
         {
+            await _todo.Load(theList);
             await _todo.Complete(new Todo.TodoItem(item));
         }
 
         private async Task AddTodo(string todo, string file)
         {
+            await _todo.Load(theList);
             await _todo.Add(new Todo.TodoItem(todo));
         }
 
@@ -103,7 +103,6 @@ namespace TodoConsoleApp
 
         static async Task Main(string[] args)
         {
-            var app = new App();
 
             //var listofArgs = args;
             var testFile = "saved.txt";
@@ -114,6 +113,7 @@ namespace TodoConsoleApp
             //var listofArgs = new[] { "-complete", "one", testFile };
 
             Commands theCommand = ParseArgs(listofArgs);
+            var app = new App(theCommand == Commands.List ? listofArgs[1] : listofArgs[2]);
 
             if (theCommand != Commands.Help)
             {

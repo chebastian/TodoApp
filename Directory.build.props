@@ -3,5 +3,6 @@
    <Deterministic>true</Deterministic>
    <Company>Sefe</Company>
    <Version>1.2.3</Version>
+   <Nullable>enable</Nullable>
  </PropertyGroup>
 </Project>

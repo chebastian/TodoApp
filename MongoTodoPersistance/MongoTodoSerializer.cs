@@ -9,6 +9,7 @@ using System.Text.Json.Serialization;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using System.Linq;
 
 namespace MongoTodoPersistance
 {
@@ -57,14 +58,14 @@ namespace MongoTodoPersistance
 
         public class TodoDataObject
         {
-            public string Name { get; set; }
+            public string? Name { get; set; }
             public bool Completed { get; set; }
         }
 
         public class TodosDataObject
         {
-            public string name { get; set; }
-            public string items { get; set; }
+            public string? name { get; set; }
+            public string? items { get; set; }
         }
 
         public async IAsyncEnumerable<TodoItem> Items()
@@ -81,7 +82,8 @@ namespace MongoTodoPersistance
             var listOfItems = JsonSerializer.Deserialize<IList<TodoDataObject>>(testing.items);
             foreach (var item in listOfItems)
             {
-                yield return new TodoItem(item.Name) { Completed = item.Completed };
+                if(item != null && item.Name != null)
+                    yield return new TodoItem(item.Name) { Completed = item.Completed };
             }
         }
     }
