@@ -14,15 +14,7 @@ namespace ViewModels
         {
             var todoService = new TodoService("", x => new TodoItemSaver(x), x => new TodoLoader(x));
             ListViewModel = new TodoListViewModel(todoService);
-            MenuViewModel = new TodoListsMenuViewModel(this,todoService)
-            {
-
-                Lists = new ObservableCollection<TodoMenu.ItemViewModel>()
-                {
-                    new TodoMenu.ItemViewModel(){Name="saved.txt"},
-                    new TodoMenu.ItemViewModel(){Name="another.txt"},
-                }
-            };
+            MenuViewModel = new TodoListsMenuViewModel(this, todoService);
         }
 
         public TodoListViewModel ListViewModel
