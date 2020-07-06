@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using Todo.Service.Interface;
 
 namespace ViewModels.TodoMenu
 {
@@ -34,7 +35,14 @@ namespace ViewModels.TodoMenu
 
     public class LoadViewModel : ViewModelBase
     {
+        private ITodoService _service;
 
+        public LoadViewModel(ITodoService service)
+        {
+            _service = service;
+        }
+
+        public ObservableCollection<ItemViewModel> Items { get; set; }
     }
 
     public class TodoListsMenuViewModel : ViewModelBase
@@ -44,10 +52,12 @@ namespace ViewModels.TodoMenu
             void OnListSelected(string name);
         }
 
-        public TodoListsMenuViewModel(ITodoListSelector selector)
+        public TodoListsMenuViewModel(ITodoListSelector selector, ITodoService service)
         {
+            _service = service;
             _selector = selector;
             MenuItemClickedCommand = new RelayCommand(OnMenuClicked);
+            Load = new LoadViewModel(service);
         }
 
         private void OnMenuClicked(object obj)
@@ -68,11 +78,12 @@ namespace ViewModels.TodoMenu
 
         public NewTodoViewModel New { get; set; } = new NewTodoViewModel();
         public SaveViewModel Save { get; set; } = new SaveViewModel();
-        public LoadViewModel Load { get; set; } = new LoadViewModel();
+        public LoadViewModel Load { get; set; }
         public ViewModelBase Current { get; set; } = new ViewModelBase();
 
 
         private ItemViewModel selectedList;
+        private ITodoService _service;
         private ITodoListSelector _selector;
 
         public ICommand  MenuItemClickedCommand { get; set; }
