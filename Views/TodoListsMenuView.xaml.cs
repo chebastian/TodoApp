@@ -42,5 +42,10 @@ namespace Views
         {
             PopupMenu.IsOpen = false;
         }
+
+        private void ToggleButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PopupMenu.PlacementTarget = (sender as UIElement);
+        }
     }
 }

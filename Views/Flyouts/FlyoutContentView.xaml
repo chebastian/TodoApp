@@ -16,10 +16,7 @@
         </Grid.ColumnDefinitions>
 
         <Border Background="{StaticResource PopupBkg}" Margin="0 0 0 0" CornerRadius="5" Grid.Column="1" >
-            <StackPanel Orientation="Vertical">
-                <TextBlock Margin="20" Text="Popup: "/>
-                <ContentPresenter Content="{Binding}"/>
-            </StackPanel>
+            <ContentPresenter Margin="10" Content="{Binding}"/>
         </Border>
         <Polygon Margin="0 0 -4 0"  Points="0,0 8,0 8,20" Fill="{StaticResource PopupBkg}"/>
         <Grid.Effect>

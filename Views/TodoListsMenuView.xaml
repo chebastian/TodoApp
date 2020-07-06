@@ -3,21 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:ViewModels.TodoMenu;assembly=ViewModels"
              xmlns:local="clr-namespace:Views"
-             xmlns:converters="clr-namespace:Views.Converters"
+             xmlns:converters="clr-namespace:Views.Converters" xmlns:flyouts="clr-namespace:Views.Flyouts"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="{StaticResource Brush_ButtonForeground}">
-        <Popup MouseLeave="PopupMenu_MouseLeave" x:Name="PopupMenu" IsOpen="{Binding ElementName=buttonRoot,Path=IsChecked}" Placement="Right">
-            <ListBox SelectionChanged="ListBox_SelectionChanged" Visibility="{Binding ElementName=buttonRoot,Path=IsChecked, Converter={converters:CollapsedWhenFalse}}" ItemsSource="{Binding Lists}" SelectedItem="{Binding SelectedList}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <TextBlock Style="{StaticResource TextStyle}" Text="{Binding Name}"/>
-                        </Grid>
+    <Grid>
+        <Popup AllowsTransparency="True" MouseLeave="PopupMenu_MouseLeave" x:Name="PopupMenu" IsOpen="{Binding ShowPopup}" PlacementTarget="{Binding Target}"  Placement="Right" >
+            <flyouts:FlyoutContentView Margin="15" Background="Transparent" DataContext="{Binding Current}">
+                <flyouts:FlyoutContentView.Resources>
+
+                    <DataTemplate DataType="{x:Type vm:SaveViewModel}">
+                        <flyouts:SaveTodoView/>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+
+                    <DataTemplate DataType="{x:Type vm:NewTodoViewModel}">
+                        <flyouts:NewTodoView/>
+                    </DataTemplate>
+
+
+                    <DataTemplate DataType="{x:Type vm:LoadViewModel}">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="load"/>
+                            <TextBlock Text="..."/>
+                        </StackPanel>
+                    </DataTemplate>
+                </flyouts:FlyoutContentView.Resources>
+            </flyouts:FlyoutContentView>
         </Popup>
 
         <StackPanel Orientation="Vertical">
@@ -38,19 +50,28 @@
             <ToggleButton 
                       Style="{StaticResource BasicToggleButton}"
                       HorizontalAlignment="Left"
+                      Command="{Binding MenuItemClickedCommand}"
+                      PreviewMouseDown="ToggleButton_MouseDown"
+                      CommandParameter="{Binding New}"
                       VerticalAlignment="Top" Height="40" Width="40">
-                <Image Style="{StaticResource ImageStyle}" Source="/Views;component/resources/new.png"/>
+                <Image IsHitTestVisible="False" Style="{StaticResource ImageStyle}" Source="/Views;component/resources/new.png"/>
             </ToggleButton>
 
             <ToggleButton 
                       Style="{StaticResource BasicToggleButton}"
                       HorizontalAlignment="Left"
+                      Command="{Binding MenuItemClickedCommand}"
+                      CommandParameter="{Binding Save}"
+                      PreviewMouseDown="ToggleButton_MouseDown"
                       VerticalAlignment="Top" Height="40" Width="40">
-                <Image Style="{StaticResource ImageStyle}" Source="/Views;component/resources/save.png"/>
+                <Image IsHitTestVisible="False" Style="{StaticResource ImageStyle}" Source="/Views;component/resources/save.png"/>
             </ToggleButton>
             <ToggleButton 
                       Style="{StaticResource BasicToggleButton}"
                       HorizontalAlignment="Left"
+                      Command="{Binding MenuItemClickedCommand}"
+                      CommandParameter="{Binding Load}"
+                      PreviewMouseDown="ToggleButton_MouseDown"
                       VerticalAlignment="Top" Height="40" Width="40">
                 <Image Style="{StaticResource ImageStyle}" Source="/Views;component/resources/open.png"/>
             </ToggleButton>
@@ -58,6 +79,7 @@
             <ToggleButton 
                       Style="{StaticResource BasicToggleButton}"
                       HorizontalAlignment="Left"
+                      PreviewMouseDown="ToggleButton_MouseDown"
                       VerticalAlignment="Top" Height="40" Width="40">
                 <Image Style="{StaticResource ImageStyle}" Source="/Views;component/resources/remove.png"/>
             </ToggleButton>
