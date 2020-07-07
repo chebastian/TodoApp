@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Todo.Service.Interface;
@@ -23,26 +24,66 @@ namespace ViewModels.TodoMenu
         }
     }
 
-    public class NewTodoViewModel : ViewModelBase
+    public class FlyoutViewModel : ViewModelBase
+    {
+        public virtual void OnOpen() { }
+    }
+
+    public class NewTodoViewModel : FlyoutViewModel
     {
 
     }
 
-    public class SaveViewModel : ViewModelBase
+    public class SaveViewModel : FlyoutViewModel
     {
+        public SaveViewModel(ITodoService service)
+        {
+            SaveCommand = new RelayCommand(() => service.Save(SaveName)); 
+        }
+
+        private string _saveName;
+        public string SaveName
+        {
+            get { return _saveName; }
+            set { _saveName = value; OnPropertyChanged(); }
+        }
+
+        public ICommand SaveCommand { get; set; }
 
     }
 
-    public class LoadViewModel : ViewModelBase
+    public class LoadViewModel : FlyoutViewModel
     {
         private ITodoService _service;
+        private TodoListsMenuViewModel.ITodoListSelector _selector;
+        private ItemViewModel selectedList;
 
-        public LoadViewModel(ITodoService service)
+        public LoadViewModel(ITodoService service, TodoListsMenuViewModel.ITodoListSelector selector)
         {
             _service = service;
+            _selector = selector;
+            var items = service.ListTodos().Result.Select(x => new ItemViewModel() { Name = x.Name }).ToList();
+            Items = new ObservableCollection<ItemViewModel>(items);
+        }
+
+        public override void OnOpen()
+        {
+            var items = _service.ListTodos().Result.Select(x => new ItemViewModel() { Name = x.Name }).ToList();
+            Items = new ObservableCollection<ItemViewModel>(items);
+            OnPropertyChanged(nameof(Items));
         }
 
         public ObservableCollection<ItemViewModel> Items { get; set; }
+        public ItemViewModel SelectedList
+        {
+            get => selectedList;
+            set
+            {
+                selectedList = value;
+                _selector.OnListSelected(value.Name);
+                OnPropertyChanged();
+            }
+        }
     }
 
     public class TodoListsMenuViewModel : ViewModelBase
@@ -57,12 +98,12 @@ namespace ViewModels.TodoMenu
             _service = service;
             _selector = selector;
             MenuItemClickedCommand = new RelayCommand(OnMenuClicked);
-            Load = new LoadViewModel(service);
         }
 
         private void OnMenuClicked(object obj)
         {
-            Current = obj as ViewModelBase;
+            Current = obj as FlyoutViewModel;
+            Current.OnOpen();
             OnPropertyChanged(nameof(Current));
             ShowPopup = false;
             ShowPopup = true;
@@ -77,28 +118,18 @@ namespace ViewModels.TodoMenu
         }
 
         public NewTodoViewModel New { get; set; } = new NewTodoViewModel();
-        public SaveViewModel Save { get; set; } = new SaveViewModel();
-        public LoadViewModel Load { get; set; }
-        public ViewModelBase Current { get; set; } = new ViewModelBase();
+        public SaveViewModel Save => new SaveViewModel(_service);
+        public LoadViewModel Load { get { return new LoadViewModel(_service, _selector); } }
+        public FlyoutViewModel Current { get; set; } = new FlyoutViewModel();
 
 
         private ItemViewModel selectedList;
         private ITodoService _service;
         private ITodoListSelector _selector;
 
-        public ICommand  MenuItemClickedCommand { get; set; }
+        public ICommand MenuItemClickedCommand { get; set; }
 
         public ObservableCollection<ItemViewModel> Lists { get; set; }
 
-        public ItemViewModel SelectedList
-        {
-            get => selectedList;
-            set
-            {
-                selectedList = value;
-                _selector.OnListSelected(value.Name);
-                OnPropertyChanged();
-            }
-        }
     }
 }
