@@ -23,10 +23,7 @@
 
 
                     <DataTemplate DataType="{x:Type vm:LoadViewModel}">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="load"/>
-                            <TextBlock Text="..."/>
-                        </StackPanel>
+                        <flyouts:LoadTodoView/>
                     </DataTemplate>
                 </flyouts:FlyoutContentView.Resources>
             </flyouts:FlyoutContentView>
