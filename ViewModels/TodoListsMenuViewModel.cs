@@ -62,13 +62,11 @@ namespace ViewModels.TodoMenu
         {
             _service = service;
             _selector = selector;
-            var items = service.ListTodos().Result.Select(x => new ItemViewModel() { Name = x.Name }).ToList();
-            Items = new ObservableCollection<ItemViewModel>(items);
         }
 
         public override void OnOpen()
         {
-            var items = _service.ListTodos().Result.Select(x => new ItemViewModel() { Name = x.Name }).ToList();
+            var items = _service.GetLists().Result.Select(x => new ItemViewModel() { Name = x.name }).ToList();
             Items = new ObservableCollection<ItemViewModel>(items);
             OnPropertyChanged(nameof(Items));
         }
@@ -79,6 +77,10 @@ namespace ViewModels.TodoMenu
             get => selectedList;
             set
             {
+                //TODO this should never happen or be handled in the service
+                if (value == null)
+                    return;
+
                 selectedList = value;
                 _selector.OnListSelected(value.Name);
                 OnPropertyChanged();
