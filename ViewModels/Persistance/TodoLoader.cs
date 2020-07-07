@@ -78,5 +78,14 @@ namespace Todo.Persistance.Impl
             }
 
         }
+
+        public IEnumerable<(Guid, string)> Lists()
+        {
+            var files = Directory.GetFiles("./", "*.*");
+            foreach(var file in files)
+            {
+                yield return (Guid.NewGuid(), file);
+            }
+        }
     }
 }

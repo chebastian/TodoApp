@@ -86,5 +86,10 @@ namespace MongoTodoPersistance
                     yield return new TodoItem(item.Name) { Completed = item.Completed };
             }
         }
+
+        public IEnumerable<(Guid, string)> Lists()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

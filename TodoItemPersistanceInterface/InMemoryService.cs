@@ -70,6 +70,11 @@ namespace Todo.Service.Interface.Impl
             var res = await Task.Run(() => Saver.Save(_list.Items));
             return true;
         }
+
+        public Task<IEnumerable<(Guid, string)>> GetLists()
+        {
+            return Task.FromResult(Loader.Lists());
+        }
     }
 
     public class InMemoryTodoService : ITodoService
@@ -116,6 +121,11 @@ namespace Todo.Service.Interface.Impl
         public Task<bool> Save(string fileName)
         {
             return Task.FromResult(true);
+        }
+
+        public Task<IEnumerable<(Guid, string)>> GetLists()
+        {
+            throw new NotImplementedException();
         }
     }
 }
